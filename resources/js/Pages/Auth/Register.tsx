@@ -1,55 +1,166 @@
-import { useEffect, FormEventHandler } from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { useEffect, FormEventHandler } from 'react'
+import GuestLayout from '@/Layouts/GuestLayout'
+import InputError from '@/Components/InputError'
+import InputLabel from '@/Components/InputLabel'
+import PrimaryButton from '@/Components/PrimaryButton'
+import TextInput from '@/Components/TextInput'
+import { Head, Link, useForm } from '@inertiajs/react'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import dayjs from 'dayjs'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
+        last_name: '',
+        first_name: '',
+        last_name_kana: '',
+        first_name_kana: '',
         email: '',
+        tel: '',
+        birthday: dayjs(),
+        is_admin: false,
         password: '',
         password_confirmation: '',
-    });
+    })
 
     useEffect(() => {
         return () => {
-            reset('password', 'password_confirmation');
-        };
-    }, []);
+            reset('password', 'password_confirmation')
+        }
+    }, [])
 
     const submit: FormEventHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        post(route('register'));
-    };
+        post(route('register'))
+    }
 
     return (
         <GuestLayout>
-            <Head title="Register" />
+            <Head title="ユーザー登録" />
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
-
-                    <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
-                        autoComplete="name"
-                        isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
-                        required
+                    <InputLabel
+                        htmlFor="is_admin"
+                        value="プラン"
                     />
 
-                    <InputError message={errors.name} className="mt-2" />
+                    <FormControlLabel
+                        id="is_admin"
+                        name="is_admin"
+                        disabled
+                        control={<Checkbox sx={{ display: 'none' }} />}
+                        label={
+                            data.is_admin === true ? '企業プラン' : '個人プラン'
+                        }
+                        checked={data.is_admin}
+                        sx={{ margin: 0 }}
+                    />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel
+                        htmlFor="last_name"
+                        value="姓"
+                    />
+
+                    <TextInput
+                        id="last_name"
+                        name="last_name"
+                        value={data.last_name}
+                        className="mt-1 block w-full"
+                        autoComplete="last_name"
+                        isFocused={true}
+                        onChange={(e) => setData('last_name', e.target.value)}
+                        required
+                    />
+
+                    <InputError
+                        message={errors.last_name}
+                        className="mt-2"
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel
+                        htmlFor="first_name"
+                        value="名"
+                    />
+
+                    <TextInput
+                        id="first_name"
+                        name="first_name"
+                        value={data.first_name}
+                        className="mt-1 block w-full"
+                        autoComplete="first_name"
+                        isFocused={true}
+                        onChange={(e) => setData('first_name', e.target.value)}
+                        required
+                    />
+
+                    <InputError
+                        message={errors.first_name}
+                        className="mt-2"
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel
+                        htmlFor="last_name_kana"
+                        value="セイ"
+                    />
+
+                    <TextInput
+                        id="last_name_kana"
+                        name="last_name_kana"
+                        value={data.last_name_kana}
+                        className="mt-1 block w-full"
+                        autoComplete="last_name_kana"
+                        isFocused={true}
+                        onChange={(e) =>
+                            setData('last_name_kana', e.target.value)
+                        }
+                        required
+                    />
+
+                    <InputError
+                        message={errors.last_name_kana}
+                        className="mt-2"
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel
+                        htmlFor="first_name_kana"
+                        value="メイ"
+                    />
+
+                    <TextInput
+                        id="first_name_kana"
+                        name="first_name_kana"
+                        value={data.first_name_kana}
+                        className="mt-1 block w-full"
+                        autoComplete="first_name_kana"
+                        isFocused={true}
+                        onChange={(e) =>
+                            setData('first_name_kana', e.target.value)
+                        }
+                        required
+                    />
+
+                    <InputError
+                        message={errors.first_name_kana}
+                        className="mt-2"
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel
+                        htmlFor="email"
+                        value="メールアドレス"
+                    />
 
                     <TextInput
                         id="email"
@@ -62,11 +173,76 @@ export default function Register() {
                         required
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    <InputError
+                        message={errors.email}
+                        className="mt-2"
+                    />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <InputLabel
+                        htmlFor="tel"
+                        value="電話番号"
+                    />
+
+                    <TextInput
+                        id="tel"
+                        name="tel"
+                        value={data.tel}
+                        className="mt-1 block w-full"
+                        autoComplete="tel"
+                        isFocused={true}
+                        onChange={(e) => setData('tel', e.target.value)}
+                        required
+                    />
+
+                    <InputError
+                        message={errors.tel}
+                        className="mt-2"
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel
+                        htmlFor="birthday"
+                        value="生年月日"
+                    />
+
+                    <DatePicker
+                        value={data.birthday}
+                        onChange={(newValue) => {
+                            if (newValue !== null) {
+                                setData('birthday', newValue)
+                            }
+                        }}
+                        slotProps={{
+                            textField: {
+                                id: 'birthday',
+                                name: 'birthday',
+                                className: 'mt-1 block w-full',
+                                autoComplete: 'birthday',
+                                InputProps: {
+                                    required: true,
+                                },
+                            },
+                            calendarHeader: {
+                                format: 'YYYY年MM月',
+                            },
+                        }}
+                        format="YYYY/MM/DD"
+                    />
+
+                    <InputError
+                        message={errors.birthday}
+                        className="mt-2"
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel
+                        htmlFor="password"
+                        value="パスワード"
+                    />
 
                     <TextInput
                         id="password"
@@ -79,11 +255,17 @@ export default function Register() {
                         required
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
+                    <InputError
+                        message={errors.password}
+                        className="mt-2"
+                    />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
+                    <InputLabel
+                        htmlFor="password_confirmation"
+                        value="パスワード確認"
+                    />
 
                     <TextInput
                         id="password_confirmation"
@@ -92,11 +274,16 @@ export default function Register() {
                         value={data.password_confirmation}
                         className="mt-1 block w-full"
                         autoComplete="new-password"
-                        onChange={(e) => setData('password_confirmation', e.target.value)}
+                        onChange={(e) =>
+                            setData('password_confirmation', e.target.value)
+                        }
                         required
                     />
 
-                    <InputError message={errors.password_confirmation} className="mt-2" />
+                    <InputError
+                        message={errors.password_confirmation}
+                        className="mt-2"
+                    />
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
@@ -104,14 +291,17 @@ export default function Register() {
                         href={route('login')}
                         className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Already registered?
+                        すでに登録していますか？
                     </Link>
 
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Register
+                    <PrimaryButton
+                        className="ms-4"
+                        disabled={processing}
+                    >
+                        登録
                     </PrimaryButton>
                 </div>
             </form>
         </GuestLayout>
-    );
+    )
 }

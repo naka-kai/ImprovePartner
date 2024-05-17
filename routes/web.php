@@ -33,6 +33,12 @@ Route::get('/select-auth', function () {
     return Inertia::render('SelectAuth');
 });
 
+Route::middleware('auth')->prefix('/admin')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('Admin/MyTask');
+    });
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

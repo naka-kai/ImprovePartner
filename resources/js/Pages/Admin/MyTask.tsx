@@ -8,17 +8,25 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import { useState } from 'react'
 import { Button } from '@mui/base'
-import { MyTaskDeadline, MyTaskInfo, MyTaskStatus } from '@/consts/MyTaskConst'
+import {
+    MyTaskDeadline,
+    MyTaskInfo,
+    MyTaskSortMenu,
+    MyTaskStatus,
+} from '@/consts/MyTaskConst'
+import SortMenuButton from '@/Components/Molecules/SortMenuButton'
 
 export default function MyTask({ auth }: PageProps) {
-    const [isStop, setIsStop] = useState<boolean>(true)
-    const [selectedStatusIds, setSelectedStatusIds] = useState<number[]>([1, 2])
-    const [selectedDeadlineIds, setSelectedDeadlineIds] = useState<number[]>([])
+    const [isStop, setIsStop] = useState<boolean>(true) // タスクが停止中かどうか
+    const [selectedStatusIds, setSelectedStatusIds] = useState<number[]>([1, 2]) // 選択中のステータスID
+    const [selectedDeadlineIds, setSelectedDeadlineIds] = useState<number[]>([]) // 選択中の締切日ID
 
+    // 再生中か停止中かでアイコンを切り替える
     const IconComponent = isStop
         ? PlayCircleOutlinedIcon
         : StopCircleOutlinedIcon
 
+    // YYYY/MM/DDの形にフォーマットする
     const toDate = (dateInfo: Date): string => {
         const year = dateInfo.getFullYear()
         const month = ('00' + dateInfo.getMonth()).slice(-2)
@@ -27,6 +35,7 @@ export default function MyTask({ auth }: PageProps) {
         return (year + '/' + month + '/' + date).toString()
     }
 
+    // 01:00:00の形にフォーマットする
     const toTime = (timeInfo: Date): string => {
         const hours = ('00' + timeInfo.getHours()).slice(-2)
         const minutes = ('00' + timeInfo.getMinutes()).slice(-2)
@@ -35,6 +44,7 @@ export default function MyTask({ auth }: PageProps) {
         return (hours + ':' + minutes + ':' + seconds).toString()
     }
 
+    // 優先度を文字列に変換する
     const toStringPriority = (num: number): string => {
         if (num === 1) {
             return '高'
@@ -45,6 +55,7 @@ export default function MyTask({ auth }: PageProps) {
         }
     }
 
+    // ステータスを文字列に変換する
     const toStringStatus = (num: number): string => {
         if (num === 3) {
             return '完了'
@@ -55,6 +66,7 @@ export default function MyTask({ auth }: PageProps) {
         }
     }
 
+    // 締切日を文字列に変換する
     const toStringDeadline = (num: number) => {
         if (num === 1) {
             return '今日'
@@ -65,6 +77,7 @@ export default function MyTask({ auth }: PageProps) {
         }
     }
 
+    // ステータスの選択中のIDを管理する
     const handleStatusCheckboxChange = (
         e: React.ChangeEvent<HTMLInputElement>
     ) => {
@@ -78,6 +91,7 @@ export default function MyTask({ auth }: PageProps) {
         }
     }
 
+    // 締切日の選択中のIDを管理する
     const handleDeadlineCheckboxChange = (
         e: React.ChangeEvent<HTMLInputElement>
     ) => {
@@ -170,62 +184,19 @@ export default function MyTask({ auth }: PageProps) {
                         <div className="flex items-center justify-between w-full text-sm">
                             <div className="flex items-center justify-start w-1/3">
                                 <div className="w-1/6"></div>
-                                <div className="flex items-center text-gray-400 w-5/6 justify-center">
-                                    <UnfoldMoreOutlinedIcon
-                                        sx={{ fontSize: 20 }}
-                                    />
-                                    <p>タスク名</p>
-                                </div>
+                                <SortMenuButton
+                                    menu="タスク名"
+                                    width="w-5/6"
+                                />
                             </div>
                             <div className="flex items-center justify-end w-2/3">
-                                <div className="flex items-center text-gray-400 w-1/12 justify-center">
-                                    <UnfoldMoreOutlinedIcon
-                                        sx={{ fontSize: 20 }}
+                                {MyTaskSortMenu.map((menu, key) => (
+                                    <SortMenuButton
+                                        key={key}
+                                        menu={menu.name}
+                                        width={menu.width}
                                     />
-                                    <p>優先度</p>
-                                </div>
-                                <div className="flex items-center text-gray-400 w-2/12 justify-center">
-                                    <UnfoldMoreOutlinedIcon
-                                        sx={{ fontSize: 20 }}
-                                    />
-                                    <p>開始予定日</p>
-                                </div>
-                                <div className="flex items-center text-gray-400 w-2/12 justify-center">
-                                    <UnfoldMoreOutlinedIcon
-                                        sx={{ fontSize: 20 }}
-                                    />
-                                    <p>締切日</p>
-                                </div>
-                                <div className="flex items-center text-gray-400 w-1/12 justify-center">
-                                    <UnfoldMoreOutlinedIcon
-                                        sx={{ fontSize: 20 }}
-                                    />
-                                    <p>進捗率</p>
-                                </div>
-                                <div className="flex items-center text-gray-400 w-2/12 justify-center">
-                                    <UnfoldMoreOutlinedIcon
-                                        sx={{ fontSize: 20 }}
-                                    />
-                                    <p>作業時間</p>
-                                </div>
-                                <div className="flex items-center text-gray-400 w-2/12 justify-center">
-                                    <UnfoldMoreOutlinedIcon
-                                        sx={{ fontSize: 20 }}
-                                    />
-                                    <p>見積時間</p>
-                                </div>
-                                <div className="flex items-center text-gray-400 w-2/12 justify-center">
-                                    <UnfoldMoreOutlinedIcon
-                                        sx={{ fontSize: 20 }}
-                                    />
-                                    <p>予想見積時間</p>
-                                </div>
-                                <div className="flex items-center text-gray-400 w-1/12 justify-center">
-                                    <UnfoldMoreOutlinedIcon
-                                        sx={{ fontSize: 20 }}
-                                    />
-                                    <p>完了</p>
-                                </div>
+                                ))}
                             </div>
                         </div>
                         <div>

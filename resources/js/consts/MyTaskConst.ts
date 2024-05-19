@@ -1,4 +1,4 @@
-// マイタスクの型情報
+// マイタスクの型
 export interface MyTaskType {
     id: number
     isStop: boolean
@@ -12,6 +12,12 @@ export interface MyTaskType {
     think_estimated_time: Date
     progress_rate: number
     description?: string
+}
+
+// 並び替えメニューの型
+export interface MyTaskSortMenuType {
+    name: string
+    width: string
 }
 
 // ステータス
@@ -37,6 +43,47 @@ export const MyTaskDeadline = {
     oneWeekLater: 3,
 } as const
 type MyTaskDeadline = (typeof MyTaskDeadline)[keyof typeof MyTaskDeadline]
+
+// 並び替えメニューのデータ一覧
+export const MyTaskSortMenu: MyTaskSortMenuType[] = [
+    // {
+    //     name: 'タスク名',
+    //     width: 'w-5/6',
+    // },
+    {
+        name: '優先度',
+        width: 'w-1/12',
+    },
+    {
+        name: '開始予定日',
+        width: 'w-2/12',
+    },
+    {
+        name: '締切日',
+        width: 'w-2/12',
+    },
+    {
+        name: '進捗率',
+        width: 'w-1/12',
+    },
+    {
+        name: '作業時間',
+        width: 'w-2/12',
+    },
+    {
+        name: '見積時間',
+        width: 'w-2/12',
+    },
+    {
+        name: '予想見積時間',
+        width: 'w-2/12',
+    },
+    {
+        name: '完了',
+        width: 'w-1/12',
+    },
+] as const
+type MyTaskSortMenu = (typeof MyTaskSortMenu)[keyof typeof MyTaskSortMenu]
 
 // マイタスクのデータ一覧
 export const MyTaskInfo: MyTaskType[] = [

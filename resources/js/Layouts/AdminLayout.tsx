@@ -1,7 +1,7 @@
 import { PropsWithChildren, ReactNode } from 'react'
 import { User } from '@/types'
 import { MainSidebarInfo } from '@/consts/MainSidebarConst'
-import Dropdown from '@/Components/Dropdown'
+import Dropdown from '@/Components/Defaults/Dropdown'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'

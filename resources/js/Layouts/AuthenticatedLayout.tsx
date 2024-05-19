@@ -1,8 +1,8 @@
 import { useState, PropsWithChildren, ReactNode } from 'react'
 import Typography from '@mui/material/Typography'
-import Dropdown from '@/Components/Dropdown'
-import NavLink from '@/Components/NavLink'
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
+import Dropdown from '@/Components/Defaults/Dropdown'
+import NavLink from '@/Components/Defaults/NavLink'
+import ResponsiveNavLink from '@/Components/Defaults/ResponsiveNavLink'
 import { Link } from '@inertiajs/react'
 import { User } from '@/types'
 

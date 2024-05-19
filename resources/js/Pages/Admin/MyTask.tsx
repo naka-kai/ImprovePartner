@@ -1,7 +1,6 @@
 import AdminLayout from '@/Layouts/AdminLayout'
 import { Head } from '@inertiajs/react'
 import { PageProps } from '@/types'
-import UnfoldMoreOutlinedIcon from '@mui/icons-material/UnfoldMoreOutlined'
 import PlayCircleOutlinedIcon from '@mui/icons-material/PlayCircleOutlined'
 import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -9,12 +8,12 @@ import Checkbox from '@mui/material/Checkbox'
 import { useState } from 'react'
 import { Button } from '@mui/base'
 import {
-    MyTaskDeadline,
     MyTaskInfo,
+    MyTaskSortExtensionMenu,
     MyTaskSortMenu,
-    MyTaskStatus,
 } from '@/consts/MyTaskConst'
-import SortMenuButton from '@/Components/Molecules/SortMenuButton'
+import SortMenu from '@/Components/SortMenu'
+import { StatusOptions, DeadlineOptions } from '@/consts/IndexConsts'
 
 export default function MyTask({ auth }: PageProps) {
     const [isStop, setIsStop] = useState<boolean>(true) // タスクが停止中かどうか
@@ -114,7 +113,7 @@ export default function MyTask({ auth }: PageProps) {
                     <div className="flex flex-col items-center mr-6">
                         <p className="mb-2 text-gray-500">締切日</p>
                         <div>
-                            {Object.values(MyTaskDeadline).map((deadline) => (
+                            {Object.values(DeadlineOptions).map((deadline) => (
                                 <FormControlLabel
                                     key={deadline}
                                     control={
@@ -146,7 +145,7 @@ export default function MyTask({ auth }: PageProps) {
                     <div className="flex flex-col items-center">
                         <p className="mb-2 text-gray-500">ステータス</p>
                         <div>
-                            {Object.values(MyTaskStatus).map((status) => (
+                            {Object.values(StatusOptions).map((status) => (
                                 <FormControlLabel
                                     key={status}
                                     control={
@@ -181,24 +180,10 @@ export default function MyTask({ auth }: PageProps) {
                         ＋タスクを追加
                     </button>
                     <div>
-                        <div className="flex items-center justify-between w-full text-sm">
-                            <div className="flex items-center justify-start w-1/3">
-                                <div className="w-1/6"></div>
-                                <SortMenuButton
-                                    menu="タスク名"
-                                    width="w-5/6"
-                                />
-                            </div>
-                            <div className="flex items-center justify-end w-2/3">
-                                {MyTaskSortMenu.map((menu, key) => (
-                                    <SortMenuButton
-                                        key={key}
-                                        menu={menu.name}
-                                        width={menu.width}
-                                    />
-                                ))}
-                            </div>
-                        </div>
+                        <SortMenu
+                            extensionSortMenu={MyTaskSortExtensionMenu}
+                            customSortMenu={MyTaskSortMenu}
+                        />
                         <div>
                             {MyTaskInfo.map((task) => (
                                 <div

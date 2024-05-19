@@ -1,10 +1,18 @@
+import {
+    SortMenuType,
+    StatusOptionsType,
+    StatusOptions,
+    PriorityOptionsType,
+    PriorityOptions,
+} from './IndexConsts'
+
 // マイタスクの型
 export interface MyTaskType {
     id: number
     isStop: boolean
     title: string
-    status: MyTaskStatus
-    priority: MyTaskPriority
+    status: StatusOptionsType
+    priority: PriorityOptionsType
     scheduled_start_day: Date
     scheduled_end_day: Date
     working_hours: Date
@@ -14,42 +22,16 @@ export interface MyTaskType {
     description?: string
 }
 
-// 並び替えメニューの型
-export interface MyTaskSortMenuType {
-    name: string
-    width: string
-}
+// 並び替えメニューの左側のデータ一覧（'タスク名'や'プロジェクト名'など、幅を大きくとるもの）
+export const MyTaskSortExtensionMenu: SortMenuType[] = [
+    {
+        name: 'タスク名',
+        width: 'w-5/6',
+    },
+]
 
-// ステータス
-export const MyTaskStatus = {
-    notStarted: 1, // 未着手
-    working: 2, // 進行中
-    completed: 3, // 完了
-} as const
-type MyTaskStatus = (typeof MyTaskStatus)[keyof typeof MyTaskStatus]
-
-// 優先度
-export const MyTaskPriority = {
-    high: 1,
-    middle: 2,
-    low: 3,
-} as const
-type MyTaskPriority = (typeof MyTaskPriority)[keyof typeof MyTaskPriority]
-
-// 締切日
-export const MyTaskDeadline = {
-    today: 1,
-    threeDaysLater: 2,
-    oneWeekLater: 3,
-} as const
-type MyTaskDeadline = (typeof MyTaskDeadline)[keyof typeof MyTaskDeadline]
-
-// 並び替えメニューのデータ一覧
-export const MyTaskSortMenu: MyTaskSortMenuType[] = [
-    // {
-    //     name: 'タスク名',
-    //     width: 'w-5/6',
-    // },
+// 並び替えメニューの右側のデータ一覧
+export const MyTaskSortMenu: SortMenuType[] = [
     {
         name: '優先度',
         width: 'w-1/12',
@@ -91,8 +73,8 @@ export const MyTaskInfo: MyTaskType[] = [
         id: 1,
         isStop: true,
         title: 'タスク１',
-        status: MyTaskStatus.notStarted,
-        priority: MyTaskPriority.high,
+        status: StatusOptions.notStarted,
+        priority: PriorityOptions.high,
         scheduled_start_day: new Date(2024, 5, 10),
         scheduled_end_day: new Date(2024, 5, 10),
         working_hours: new Date(2024, 5, 10, 1, 0, 0),
@@ -105,8 +87,8 @@ export const MyTaskInfo: MyTaskType[] = [
         id: 2,
         isStop: true,
         title: 'タスク２',
-        status: MyTaskStatus.notStarted,
-        priority: MyTaskPriority.high,
+        status: StatusOptions.notStarted,
+        priority: PriorityOptions.high,
         scheduled_start_day: new Date(2024, 5, 10),
         scheduled_end_day: new Date(2024, 5, 10),
         working_hours: new Date(2024, 5, 10, 1, 0, 0),
@@ -119,8 +101,8 @@ export const MyTaskInfo: MyTaskType[] = [
         id: 3,
         isStop: true,
         title: 'タスク３',
-        status: MyTaskStatus.completed,
-        priority: MyTaskPriority.low,
+        status: StatusOptions.completed,
+        priority: PriorityOptions.low,
         scheduled_start_day: new Date(2024, 5, 10),
         scheduled_end_day: new Date(2024, 5, 10),
         working_hours: new Date(2024, 5, 10, 1, 0, 0),
@@ -133,8 +115,8 @@ export const MyTaskInfo: MyTaskType[] = [
         id: 4,
         isStop: true,
         title: 'タスク４',
-        status: MyTaskStatus.notStarted,
-        priority: MyTaskPriority.high,
+        status: StatusOptions.notStarted,
+        priority: PriorityOptions.high,
         scheduled_start_day: new Date(2024, 10, 10),
         scheduled_end_day: new Date(2024, 5, 10),
         working_hours: new Date(2024, 5, 10, 1, 0, 0),
@@ -147,8 +129,8 @@ export const MyTaskInfo: MyTaskType[] = [
         id: 5,
         isStop: true,
         title: 'タスク５',
-        status: MyTaskStatus.notStarted,
-        priority: MyTaskPriority.high,
+        status: StatusOptions.notStarted,
+        priority: PriorityOptions.high,
         scheduled_start_day: new Date(2024, 5, 10),
         scheduled_end_day: new Date(2024, 5, 10),
         working_hours: new Date(2024, 5, 10, 1, 0, 0),

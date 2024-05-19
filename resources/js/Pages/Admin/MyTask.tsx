@@ -14,10 +14,10 @@ import {
 } from '@/consts/MyTaskConst'
 import SortMenu from '@/Components/SortMenu'
 import { StatusOptions, DeadlineOptions } from '@/consts/IndexConsts'
+import StatusOption from '@/Components/StatusOption'
 
 export default function MyTask({ auth }: PageProps) {
     const [isStop, setIsStop] = useState<boolean>(true) // タスクが停止中かどうか
-    const [selectedStatusIds, setSelectedStatusIds] = useState<number[]>([1, 2]) // 選択中のステータスID
     const [selectedDeadlineIds, setSelectedDeadlineIds] = useState<number[]>([]) // 選択中の締切日ID
 
     // 再生中か停止中かでアイコンを切り替える
@@ -54,17 +54,6 @@ export default function MyTask({ auth }: PageProps) {
         }
     }
 
-    // ステータスを文字列に変換する
-    const toStringStatus = (num: number): string => {
-        if (num === 3) {
-            return '完了'
-        } else if (num === 2) {
-            return '進行中'
-        } else {
-            return '未着手'
-        }
-    }
-
     // 締切日を文字列に変換する
     const toStringDeadline = (num: number) => {
         if (num === 1) {
@@ -73,20 +62,6 @@ export default function MyTask({ auth }: PageProps) {
             return '3日後'
         } else if (num === 3) {
             return '1週間後'
-        }
-    }
-
-    // ステータスの選択中のIDを管理する
-    const handleStatusCheckboxChange = (
-        e: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        const checkedId: number = Number(e.target.value)
-        if (e.target.checked) {
-            setSelectedStatusIds([...selectedStatusIds, checkedId])
-        } else {
-            setSelectedStatusIds(
-                selectedStatusIds.filter((id) => id !== checkedId)
-            )
         }
     }
 
@@ -142,38 +117,7 @@ export default function MyTask({ auth }: PageProps) {
                             ))}
                         </div>
                     </div>
-                    <div className="flex flex-col items-center">
-                        <p className="mb-2 text-gray-500">ステータス</p>
-                        <div>
-                            {Object.values(StatusOptions).map((status) => (
-                                <FormControlLabel
-                                    key={status}
-                                    control={
-                                        <Checkbox
-                                            sx={{ display: 'none' }}
-                                            value={status}
-                                            checked={selectedStatusIds.includes(
-                                                status
-                                            )}
-                                            onChange={(e) => {
-                                                handleStatusCheckboxChange(e)
-                                            }}
-                                        />
-                                    }
-                                    label={toStringStatus(status)}
-                                    className={
-                                        selectedStatusIds.includes(status)
-                                            ? 'bg-sky-300 py-1 px-4 rounded-sm border-sky-300 border'
-                                            : 'py-1 px-4 rounded-sm border-gray-200 border'
-                                    }
-                                    sx={{
-                                        marginRight: '0.25rem',
-                                        marginLeft: '0.25rem',
-                                    }}
-                                />
-                            ))}
-                        </div>
-                    </div>
+                    <StatusOption />
                 </div>
                 <div className="mx-2">
                     <button className="my-3 text-gray-500">

@@ -3,7 +3,6 @@ import { Head } from '@inertiajs/react'
 import { PageProps } from '@/types'
 import PlayCircleOutlinedIcon from '@mui/icons-material/PlayCircleOutlined'
 import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import { useState } from 'react'
 import { Button } from '@mui/base'
@@ -13,12 +12,11 @@ import {
     MyTaskSortMenu,
 } from '@/consts/MyTaskConst'
 import SortMenu from '@/Components/SortMenu'
-import { StatusOptions, DeadlineOptions } from '@/consts/IndexConsts'
 import StatusOption from '@/Components/StatusOption'
+import DeadlineOption from '@/Components/DeadlineOption'
 
 export default function MyTask({ auth }: PageProps) {
     const [isStop, setIsStop] = useState<boolean>(true) // タスクが停止中かどうか
-    const [selectedDeadlineIds, setSelectedDeadlineIds] = useState<number[]>([]) // 選択中の締切日ID
 
     // 再生中か停止中かでアイコンを切り替える
     const IconComponent = isStop
@@ -54,69 +52,13 @@ export default function MyTask({ auth }: PageProps) {
         }
     }
 
-    // 締切日を文字列に変換する
-    const toStringDeadline = (num: number) => {
-        if (num === 1) {
-            return '今日'
-        } else if (num === 2) {
-            return '3日後'
-        } else if (num === 3) {
-            return '1週間後'
-        }
-    }
-
-    // 締切日の選択中のIDを管理する
-    const handleDeadlineCheckboxChange = (
-        e: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        const checkedId: number = Number(e.target.value)
-        if (e.target.checked) {
-            setSelectedDeadlineIds([...selectedDeadlineIds, checkedId])
-        } else {
-            setSelectedDeadlineIds(
-                selectedDeadlineIds.filter((id) => id !== checkedId)
-            )
-        }
-    }
-
     return (
         <AdminLayout user={auth.user}>
             <Head title="マイタスク" />
 
             <div>
                 <div className="border-gray-300 border-b flex justify-end pt-5 pb-2 px-5">
-                    <div className="flex flex-col items-center mr-6">
-                        <p className="mb-2 text-gray-500">締切日</p>
-                        <div>
-                            {Object.values(DeadlineOptions).map((deadline) => (
-                                <FormControlLabel
-                                    key={deadline}
-                                    control={
-                                        <Checkbox
-                                            sx={{ display: 'none' }}
-                                            value={deadline}
-                                            checked={selectedDeadlineIds.includes(
-                                                deadline
-                                            )}
-                                            onChange={(e) => {
-                                                handleDeadlineCheckboxChange(e)
-                                            }}
-                                        />
-                                    }
-                                    label={toStringDeadline(deadline)}
-                                    className={
-                                        selectedDeadlineIds.includes(deadline)
-                                            ? 'bg-sky-300 py-1 px-4 rounded-sm border-sky-300 border'
-                                            : 'py-1 px-4 rounded-sm border-gray-200 border'
-                                    }
-                                    sx={{
-                                        marginRight: '0.25rem',
-                                        marginLeft: '0.25rem',
-                                    }}
-                                />
-                            ))}
-                        </div>
-                    </div>
+                    <DeadlineOption />
                     <StatusOption />
                 </div>
                 <div className="mx-2">

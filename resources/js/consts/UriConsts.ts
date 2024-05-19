@@ -1,6 +1,6 @@
 export enum UriEnum {
     // マイタスク
-    MyTask = '/mytask',
+    MyTask = '/',
 
     // プロジェクト管理
     Project = '/project',

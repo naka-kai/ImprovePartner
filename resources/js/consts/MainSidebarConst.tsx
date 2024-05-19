@@ -9,7 +9,7 @@ import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined'
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 
-// メインサイドバーのメニュータイプ
+// メインサイドバーのメニューの型情報
 export interface MainSidebarMenuType<T> {
     key: T
     title: string
@@ -23,64 +23,66 @@ export interface MainSidebarMenuType<T> {
     }[]
 }
 
-export enum MainSidebarStatusEnum {
+// メインサイドバーのメニューのキーNo.
+export enum MainSidebarKeyEum {
     MyTask = 1,
-    Project,
-    Team,
-    Client,
-    Dashboard,
-    Analysis,
-    Export,
-    Setting,
+    Project = 2,
+    Team = 3,
+    Client = 4,
+    Dashboard = 5,
+    Analysis = 6,
+    Export = 7,
+    Setting = 8,
 }
 
-export const MainSidebarInfo: MainSidebarMenuType<MainSidebarStatusEnum>[] = [
+// メインサイドバーのデータ一覧
+export const MainSidebarInfo: MainSidebarMenuType<MainSidebarKeyEum>[] = [
     {
-        key: MainSidebarStatusEnum.MyTask,
+        key: MainSidebarKeyEum.MyTask,
         title: 'マイタスク',
         href: UriEnum.MyTask,
-        svg: <TaskAltOutlinedIcon />,
+        svg: <TaskAltOutlinedIcon sx={{ fontSize: 30 }} />,
     },
     {
-        key: MainSidebarStatusEnum.Project,
+        key: MainSidebarKeyEum.Project,
         title: 'プロジェクト管理',
         href: UriEnum.Project,
-        svg: <AccountTreeOutlinedIcon />,
+        svg: <AccountTreeOutlinedIcon sx={{ fontSize: 30 }} />,
     },
     {
-        key: MainSidebarStatusEnum.Team,
+        key: MainSidebarKeyEum.Team,
         title: 'チーム管理',
         href: UriEnum.Team,
-        svg: <Diversity3OutlinedIcon />,
+        svg: <Diversity3OutlinedIcon sx={{ fontSize: 30 }} />,
     },
     {
-        key: MainSidebarStatusEnum.Client,
+        key: MainSidebarKeyEum.Client,
         title: '取引先管理',
         href: UriEnum.Client,
-        svg: <BusinessOutlinedIcon />,
+        svg: <BusinessOutlinedIcon sx={{ fontSize: 30 }} />,
     },
     {
-        key: MainSidebarStatusEnum.Dashboard,
+        key: MainSidebarKeyEum.Dashboard,
         title: 'ダッシュボード',
         href: UriEnum.Dashboard,
-        svg: <DashboardCustomizeOutlinedIcon />,
+        svg: <DashboardCustomizeOutlinedIcon sx={{ fontSize: 30 }} />,
     },
     {
-        key: MainSidebarStatusEnum.Analysis,
+        key: MainSidebarKeyEum.Analysis,
         title: '時間分析',
         href: UriEnum.Analysis,
-        svg: <InsertChartOutlinedIcon />,
+        svg: <InsertChartOutlinedIcon sx={{ fontSize: 30 }} />,
     },
     {
-        key: MainSidebarStatusEnum.Export,
+        key: MainSidebarKeyEum.Export,
         title: 'エクスポート',
         href: UriEnum.Export,
-        svg: <FileUploadOutlinedIcon />,
+        svg: <FileUploadOutlinedIcon sx={{ fontSize: 30 }} />,
     },
     {
-        key: MainSidebarStatusEnum.Setting,
+        key: MainSidebarKeyEum.Setting,
         title: '各種設定',
         href: UriEnum.Setting,
-        svg: <SettingsOutlinedIcon />,
+        svg: <SettingsOutlinedIcon sx={{ fontSize: 30 }} />,
     },
 ]

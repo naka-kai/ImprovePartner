@@ -14,6 +14,7 @@ import {
 import SortMenu from '@/Components/SortMenu'
 import StatusOption from '@/Components/StatusOption'
 import DeadlineOption from '@/Components/DeadlineOption'
+import { format } from 'date-fns/format'
 
 export default function MyTask({ auth }: PageProps) {
     const [isStop, setIsStop] = useState<boolean>(true) // タスクが停止中かどうか
@@ -25,20 +26,12 @@ export default function MyTask({ auth }: PageProps) {
 
     // YYYY/MM/DDの形にフォーマットする
     const toDate = (dateInfo: Date): string => {
-        const year = dateInfo.getFullYear()
-        const month = ('00' + dateInfo.getMonth()).slice(-2)
-        const date = ('00' + dateInfo.getDate()).slice(-2)
-
-        return (year + '/' + month + '/' + date).toString()
+        return format(dateInfo, 'yyyy/MM/dd')
     }
 
     // 01:00:00の形にフォーマットする
     const toTime = (timeInfo: Date): string => {
-        const hours = ('00' + timeInfo.getHours()).slice(-2)
-        const minutes = ('00' + timeInfo.getMinutes()).slice(-2)
-        const seconds = ('00' + timeInfo.getSeconds()).slice(-2)
-
-        return (hours + ':' + minutes + ':' + seconds).toString()
+        return format(timeInfo, 'HH:mm:ss')
     }
 
     // 優先度を文字列に変換する

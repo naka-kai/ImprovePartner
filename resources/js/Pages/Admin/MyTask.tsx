@@ -14,6 +14,7 @@ import {
 import SortMenu from '@/Components/SortMenu'
 import StatusOption from '@/Components/StatusOption'
 import DeadlineOption from '@/Components/DeadlineOption'
+import AddButton from '@/Components/Molecules/AddButton'
 
 export default function MyTask({ auth }: PageProps) {
     const [isStop, setIsStop] = useState<boolean>(true) // タスクが停止中かどうか
@@ -62,9 +63,7 @@ export default function MyTask({ auth }: PageProps) {
                     <StatusOption />
                 </div>
                 <div className="mx-2">
-                    <button className="my-3 text-gray-500">
-                        ＋タスクを追加
-                    </button>
+                    <AddButton data="タスク" />
                     <div>
                         <SortMenu
                             extensionSortMenu={MyTaskSortExtensionMenu}
@@ -124,9 +123,7 @@ export default function MyTask({ auth }: PageProps) {
                             ))}
                         </div>
                     </div>
-                    <button className="my-3 text-gray-500">
-                        ＋タスクを追加
-                    </button>
+                    <AddButton data="タスク" />
                 </div>
             </div>
         </AdminLayout>

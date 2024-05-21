@@ -4,6 +4,7 @@ import {
     StatusOptions,
     PriorityOptionsType,
     PriorityOptions,
+    TableRowType,
 } from './IndexConsts'
 
 // マイタスクの型
@@ -66,6 +67,22 @@ export const MyTaskSortMenu: SortMenuType[] = [
     },
 ] as const
 type MyTaskSortMenu = (typeof MyTaskSortMenu)[keyof typeof MyTaskSortMenu]
+
+// マイタスクの表一行のデータ一覧
+export const MyTaskTableRow: TableRowType[] = [
+    {
+        data: task.priority,
+        function: toStringPriority(data),
+        width: 'w-1/12',
+        alignment: 'center',
+    },
+    {
+        data: task.scheduled_start_day,
+        function: toDate(data),
+        width: 'w-2/12',
+        alignment: 'center',
+    },
+]
 
 // マイタスクのデータ一覧
 export const MyTaskInfo: MyTaskType[] = [

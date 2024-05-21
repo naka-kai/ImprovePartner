@@ -1,14 +1,7 @@
 import AdminLayout from '@/Layouts/AdminLayout'
 import { Head } from '@inertiajs/react'
 import { PageProps } from '@/types'
-
-import { useState } from 'react'
-
-import {
-    MyTaskInfo,
-    MyTaskSortExtensionMenu,
-    MyTaskSortMenu,
-} from '@/consts/MyTaskConst'
+import { MyTaskSortExtensionMenu, MyTaskSortMenu } from '@/consts/MyTaskConst'
 import SortMenu from '@/Components/SortMenu'
 import StatusOption from '@/Components/StatusOption'
 import DeadlineOption from '@/Components/DeadlineOption'

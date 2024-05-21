@@ -8,6 +8,16 @@ export interface SortMenuType {
     width: string
 }
 
+// 表一行の型
+export interface TableRowType {
+    data: string | PriorityOptionsType | Date | number | StatusOptionsType
+    function?: (
+        data: string | PriorityOptionsType | Date | number | StatusOptionsType
+    ) => string
+    width: string
+    alignment: 'left' | 'center' | 'right'
+}
+
 // ステータス
 export const StatusOptions = {
     notStarted: 1, // 未着手

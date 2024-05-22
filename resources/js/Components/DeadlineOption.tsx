@@ -8,11 +8,11 @@ const DeadlineOption: React.FC = () => {
 
     // 締切日を文字列に変換する
     const toStringDeadline = (num: number) => {
-        if (num === 1) {
+        if (num === DeadlineOptions.today) {
             return '今日'
-        } else if (num === 2) {
+        } else if (num === DeadlineOptions.threeDaysLater) {
             return '3日後'
-        } else if (num === 3) {
+        } else if (num === DeadlineOptions.oneWeekLater) {
             return '1週間後'
         }
     }

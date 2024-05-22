@@ -21,9 +21,9 @@ const StatusOption: React.FC = () => {
     }
     // ステータスを文字列に変換する
     const toStringStatus = (num: number): string => {
-        if (num === 3) {
+        if (num === StatusOptions.completed) {
             return '完了'
-        } else if (num === 2) {
+        } else if (num === StatusOptions.working) {
             return '進行中'
         } else {
             return '未着手'

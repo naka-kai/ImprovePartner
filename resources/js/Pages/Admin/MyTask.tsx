@@ -16,6 +16,7 @@ import StatusOption from '@/Components/StatusOption'
 import DeadlineOption from '@/Components/DeadlineOption'
 import AddButton from '@/Components/Molecules/AddButton'
 import { format } from 'date-fns/format'
+import { PriorityOptions } from '@/consts/IndexConsts'
 
 export default function MyTask({ auth }: PageProps) {
     const [isStop, setIsStop] = useState<boolean>(true) // タスクが停止中かどうか
@@ -37,9 +38,9 @@ export default function MyTask({ auth }: PageProps) {
 
     // 優先度を文字列に変換する
     const toStringPriority = (num: number): string => {
-        if (num === 1) {
+        if (num === PriorityOptions.high) {
             return '高'
-        } else if (num === 2) {
+        } else if (num === PriorityOptions.middle) {
             return '中'
         } else {
             return '低'

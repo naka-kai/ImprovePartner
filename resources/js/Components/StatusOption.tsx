@@ -25,8 +25,10 @@ const StatusOption: React.FC = () => {
             return '完了'
         } else if (num === StatusOptions.working) {
             return '進行中'
-        } else {
+        } else if (num === StatusOptions.notStarted) {
             return '未着手'
+        } else {
+            throw new Error('不正な値を検出: StatusOptions=' + num)
         }
     }
 

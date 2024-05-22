@@ -42,8 +42,10 @@ export default function MyTask({ auth }: PageProps) {
             return '高'
         } else if (num === PriorityOptions.middle) {
             return '中'
-        } else {
+        } else if (num === PriorityOptions.low) {
             return '低'
+        } else {
+            throw new Error('不正な値を検出: PriorityOptions=' + num)
         }
     }
 

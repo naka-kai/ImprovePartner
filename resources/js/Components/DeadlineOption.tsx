@@ -7,13 +7,15 @@ const DeadlineOption: React.FC = () => {
     const [selectedDeadlineIds, setSelectedDeadlineIds] = useState<number[]>([]) // 選択中の締切日ID
 
     // 締切日を文字列に変換する
-    const toStringDeadline = (num: number) => {
+    const toStringDeadline = (num: number): string => {
         if (num === DeadlineOptions.today) {
             return '今日'
         } else if (num === DeadlineOptions.threeDaysLater) {
             return '3日後'
         } else if (num === DeadlineOptions.oneWeekLater) {
             return '1週間後'
+        } else {
+            throw new Error('不正な値を検出: DeadlineOptions=' + num)
         }
     }
 

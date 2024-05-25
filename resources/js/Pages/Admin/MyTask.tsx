@@ -3,8 +3,8 @@ import { Head } from '@inertiajs/react'
 import { PageProps } from '@/types'
 import PlayCircleOutlinedIcon from '@mui/icons-material/PlayCircleOutlined'
 import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined'
-import Checkbox from '@mui/material/Checkbox'
-import { useState } from 'react'
+import Checkbox from '@/Components/Defaults/Checkbox'
+import React, { useState } from 'react'
 import { Button } from '@mui/base'
 import {
     MyTaskInfo,
@@ -18,7 +18,7 @@ import AddButton from '@/Components/Molecules/AddButton'
 import { format } from 'date-fns/format'
 import { PriorityOptions } from '@/consts/IndexConsts'
 
-export default function MyTask({ auth }: PageProps) {
+const MyTask: React.FC<PageProps> = ({ auth }) => {
     const [isStop, setIsStop] = useState<boolean>(true) // タスクが停止中かどうか
 
     // 再生中か停止中かでアイコンを切り替える
@@ -125,3 +125,5 @@ export default function MyTask({ auth }: PageProps) {
         </AdminLayout>
     )
 }
+
+export default MyTask

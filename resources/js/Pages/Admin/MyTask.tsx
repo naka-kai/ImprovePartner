@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/react'
 import { PageProps } from '@/types'
 import PlayCircleOutlinedIcon from '@mui/icons-material/PlayCircleOutlined'
 import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined'
-import Checkbox from '@mui/material/Checkbox'
+import Checkbox from '@/Components/Defaults/Checkbox'
 import React, { useState } from 'react'
 import { Button } from '@mui/base'
 import {

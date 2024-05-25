@@ -22,6 +22,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Typography from '@mui/material/Typography'
 import SortButton from '@/Components/Molecules/SortButton'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
+import EditIcon from '@mui/icons-material/Edit'
 
 const Project: React.FC<PageProps> = ({ auth }) => {
     const [isStop, setIsStop] = useState<boolean>(true) // タスクが停止中かどうか
@@ -136,6 +137,19 @@ const Project: React.FC<PageProps> = ({ auth }) => {
                     </div>
                 </div>
                 <div className="w-[calc(100%-13rem)]">
+                    <div>
+                        <div className="flex items-center mt-5 ml-5">
+                            <h2>
+                                プロジェクト１プロジェクト１プロジェクト１プロジェクト１
+                            </h2>
+                            <Button>
+                                <EditIcon
+                                    fontSize="small"
+                                    className="mt-[-5px] ml-1 text-gray-400"
+                                />
+                            </Button>
+                        </div>
+                    </div>
                     <div className="border-gray-300 border-b flex justify-end pt-5 pb-2 px-5">
                         <DeadlineOption />
                         <StatusOption />

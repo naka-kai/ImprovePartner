@@ -24,6 +24,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import TextInput from '@/Components/Defaults/TextInput'
 import Checkbox from '@/Components/Defaults/Checkbox'
 import InputLabel from '@/Components/Defaults/InputLabel'
+import EditIcon from '@mui/icons-material/Edit'
 
 const Project: React.FC<PageProps> = ({ auth }) => {
     const [isStop, setIsStop] = useState<boolean>(true) // タスクが停止中かどうか
@@ -114,12 +115,40 @@ const Project: React.FC<PageProps> = ({ auth }) => {
                                 <p className="ml-3">プロジェクト２</p>
                             </div>
                         </div>
-                        <div>
+                        <div className="w-full flex justify-start ml-3 text-sm">
                             <AddButton data="プロジェクト" />
                         </div>
                     </div>
                 </div>
                 <div className="w-[calc(100%-13rem)]">
+                    <div>
+                        <div className="flex items-center mt-5 ml-5">
+                            <h2>
+                                プロジェクト１プロジェクト１プロジェクト１プロジェクト１
+                            </h2>
+                            <Button>
+                                <EditIcon
+                                    fontSize="small"
+                                    className="mt-[-5px] ml-1 text-gray-400"
+                                />
+                            </Button>
+                        </div>
+                        <div className="flex items-center justify-end mt-3 text-gray-500">
+                            <div className="mr-5">
+                                <span>
+                                    プロジェクトの見積時間： 100日 00:00:00
+                                </span>
+                            </div>
+                            <div className="mr-5">
+                                <span>
+                                    タスクの合計見積時間： 100日 00:00:00
+                                </span>
+                            </div>
+                            <div className="mr-5">
+                                <span>合計作業時間： 100日 00:00:00</span>
+                            </div>
+                        </div>
+                    </div>
                     <div className="border-gray-300 border-b flex justify-end pt-5 pb-2 px-5">
                         <DeadlineOption />
                         <StatusOption />

@@ -2,6 +2,7 @@ import { DeadlineOptions } from '@/consts/IndexConsts'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import React, { useState } from 'react'
+import { Typography } from '@mui/material'
 
 const DeadlineOption: React.FC = () => {
     const [selectedDeadlineIds, setSelectedDeadlineIds] = useState<number[]>([]) // 選択中の締切日ID
@@ -35,7 +36,7 @@ const DeadlineOption: React.FC = () => {
 
     return (
         <div className="flex flex-col items-center mr-6">
-            <p className="mb-2 text-gray-500">締切日</p>
+            <p className="mb-2 text-gray-500 text-sm">締切日</p>
             <div>
                 {Object.values(DeadlineOptions).map((deadline) => (
                     <FormControlLabel
@@ -50,7 +51,11 @@ const DeadlineOption: React.FC = () => {
                                 }}
                             />
                         }
-                        label={toStringDeadline(deadline)}
+                        label={
+                            <Typography sx={{ fontSize: 13 }}>
+                                {toStringDeadline(deadline)}
+                            </Typography>
+                        }
                         className={
                             selectedDeadlineIds.includes(deadline)
                                 ? 'bg-sky-300 py-1 px-4 rounded-sm border-sky-300 border'

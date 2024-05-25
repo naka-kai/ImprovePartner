@@ -15,8 +15,8 @@ const InputText = React.forwardRef(function CustomInput(
     )
 })
 
-export default function UnstyledInputBasic() {
-    return <InputText placeholder="Type something…" />
+export default function UnstyledInputBasic({ placeholderText }) {
+    return <InputText placeholder={placeholderText} />
 }
 
 const blue = {

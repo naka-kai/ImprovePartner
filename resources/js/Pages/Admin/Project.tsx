@@ -149,6 +149,21 @@ const Project: React.FC<PageProps> = ({ auth }) => {
                                 />
                             </Button>
                         </div>
+                        <div className="flex items-center justify-end mt-3 text-gray-500">
+                            <div className="mr-5">
+                                <span>
+                                    プロジェクトの見積時間： 100日 00:00:00
+                                </span>
+                            </div>
+                            <div className="mr-5">
+                                <span>
+                                    タスクの合計見積時間： 100日 00:00:00
+                                </span>
+                            </div>
+                            <div className="mr-5">
+                                <span>合計作業時間： 100日 00:00:00</span>
+                            </div>
+                        </div>
                     </div>
                     <div className="border-gray-300 border-b flex justify-end pt-5 pb-2 px-5">
                         <DeadlineOption />

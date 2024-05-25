@@ -3,7 +3,6 @@ import { Head } from '@inertiajs/react'
 import { PageProps } from '@/types'
 import PlayCircleOutlinedIcon from '@mui/icons-material/PlayCircleOutlined'
 import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined'
-import Checkbox from '@mui/material/Checkbox'
 import React, { useState } from 'react'
 import { Button } from '@mui/base'
 import {
@@ -22,6 +21,9 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Typography from '@mui/material/Typography'
 import SortButton from '@/Components/Molecules/SortButton'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
+import TextInput from '@/Components/Defaults/TextInput'
+import Checkbox from '@/Components/Defaults/Checkbox'
+import InputLabel from '@/Components/Defaults/InputLabel'
 import EditIcon from '@mui/icons-material/Edit'
 
 const Project: React.FC<PageProps> = ({ auth }) => {
@@ -79,41 +81,23 @@ const Project: React.FC<PageProps> = ({ auth }) => {
                         </p>
                     </div>
                     <div className="flex flex-col items-center justify-center my-3">
-                        <div className="my-1">
-                            {/* <TextField
-                                className="bg-white rounded-md"
-                                id="project-name"
-                                label="プロジェクト名で絞り込む"
-                                variant="outlined"
-                                size="small"
-                                InputLabelProps={{
-                                    style: { fontSize: '13px' },
-                                    shrink: false,
-                                }}
-                            /> */}
-                        </div>
-                        <div className="my-1">
-                            <TextField
-                                className="bg-white rounded-md"
-                                id="client-name"
-                                label="取引先名で絞り込む"
-                                variant="outlined"
-                                size="small"
-                                InputLabelProps={{
-                                    style: { fontSize: '13px' },
-                                    shrink: false,
-                                }}
+                        <div className="my-1 w-11/12">
+                            <TextInput
+                                className="text-[13px] w-full"
+                                placeholder="プロジェクト名で絞り込む"
                             />
                         </div>
-                        <div>
-                            <FormControlLabel
-                                control={<Checkbox />}
-                                label={
-                                    <Typography sx={{ fontSize: 13 }}>
-                                        完了プロジェクトを表示
-                                    </Typography>
-                                }
+                        <div className="my-1 w-11/12">
+                            <TextInput
+                                className="text-[13px] w-full"
+                                placeholder="取引先名で絞り込む"
                             />
+                        </div>
+                        <div className="flex items-center w-11/12 mt-1">
+                            <InputLabel className="block text-sm text-gray-500">
+                                <Checkbox className="mr-2" />
+                                完了プロジェクトを表示
+                            </InputLabel>
                         </div>
                         <div className="text-[13px] text-gray-500 mt-3 mb-1">
                             <SortButton

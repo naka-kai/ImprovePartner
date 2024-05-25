@@ -131,7 +131,7 @@ const Project: React.FC<PageProps> = ({ auth }) => {
                                 <p className="ml-3">プロジェクト２</p>
                             </div>
                         </div>
-                        <div>
+                        <div className="w-full flex justify-start ml-3 text-sm">
                             <AddButton data="プロジェクト" />
                         </div>
                     </div>

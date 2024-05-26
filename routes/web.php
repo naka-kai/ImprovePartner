@@ -17,28 +17,41 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('MyTask', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/select-auth', function () {
     return Inertia::render('SelectAuth');
 });
 
-Route::middleware('auth')->prefix('/admin')->group(function () {
-    Route::get('/', function () {
-        return Inertia::render('Admin/MyTask');
-    });
+Route::middleware('auth')->group(function () {
     Route::get('/project', function () {
-        return Inertia::render('Admin/Project');
+        return Inertia::render('Project');
+    });
+    Route::get('/team', function () {
+        return Inertia::render('Team');
+    });
+    Route::get('/client', function () {
+        return Inertia::render('Client');
+    });
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    });
+    Route::get('/analysis', function () {
+        return Inertia::render('Analysis');
+    });
+    Route::get('/export', function () {
+        return Inertia::render('Export');
+    });
+    Route::get('/setting', function () {
+        return Inertia::render('Setting');
     });
 });
 

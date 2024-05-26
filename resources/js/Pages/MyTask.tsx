@@ -1,4 +1,4 @@
-import AdminLayout from '@/Layouts/AdminLayout'
+import Layout from '@/Layouts/Layout'
 import { Head } from '@inertiajs/react'
 import { PageProps } from '@/types'
 import { MyTaskExtensionMenu, MyTaskMenu } from '@/consts/MyTaskConst'
@@ -11,7 +11,7 @@ import AddButton from '@/Components/Molecules/AddButton'
 
 const MyTask: React.FC<PageProps> = ({ auth }) => {
     return (
-        <AdminLayout user={auth.user}>
+        <Layout user={auth.user}>
             <Head title="マイタスク" />
 
             <div>
@@ -34,7 +34,7 @@ const MyTask: React.FC<PageProps> = ({ auth }) => {
                     <AddButton data="タスク" />
                 </div>
             </div>
-        </AdminLayout>
+        </Layout>
     )
 }
 

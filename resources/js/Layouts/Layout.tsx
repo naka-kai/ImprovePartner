@@ -6,7 +6,7 @@ import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 
-export default function Admin({
+export default function Layout({
     user,
     children,
 }: PropsWithChildren<{ user: User }>) {
@@ -15,7 +15,7 @@ export default function Admin({
             <div className="min-h-screen flex">
                 <nav className="bg-sky-300 w-64 h-screen">
                     <Link
-                        href="/admin"
+                        href="/"
                         className="hover:opacity-70 block p-2 text-center"
                         variant="h1"
                         fontSize={24}

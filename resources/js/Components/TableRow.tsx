@@ -68,55 +68,6 @@ const TableRow: React.FC<Props> = ({ extensionMenu, customMenu }) => {
                                 type={menu.name}
                             />
                         ))}
-                        {/* <TableData
-                            key="w-1/12"
-                            width="center"
-                            alignment="center"
-                            data={task.priority.label}
-                            type="priority"
-                        />
-                        <TableData
-                            width="w-2/12"
-                            alignment="center"
-                            data={task.scheduled_start_day}
-                            type="scheduled_start_day"
-                        />
-                        <TableData
-                            width="w-2/12"
-                            alignment="center"
-                            data={task.scheduled_end_day}
-                            type="scheduled_end_day"
-                        />
-                        <TableData
-                            width="w-1/12"
-                            alignment="center"
-                            data={task.progress_rate}
-                            type="progress_rate"
-                        />
-                        <TableData
-                            width="w-2/12"
-                            alignment="center"
-                            data={task.working_hours}
-                            type="working_hours"
-                        />
-                        <TableData
-                            width="w-2/12"
-                            alignment="center"
-                            data={task.estimated_time}
-                            type="estimated_time"
-                        />
-                        <TableData
-                            width="w-2/12"
-                            alignment="center"
-                            data={task.think_estimated_time}
-                            type="think_estimated_time"
-                        />
-                        <TableData
-                            width="w-1/12"
-                            alignment="center"
-                            data={task.status.value}
-                            type="status"
-                        /> */}
                     </div>
                 </div>
             ))}

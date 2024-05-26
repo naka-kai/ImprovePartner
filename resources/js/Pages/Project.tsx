@@ -1,4 +1,4 @@
-import AdminLayout from '@/Layouts/AdminLayout'
+import Layout from '@/Layouts/Layout'
 import { Head } from '@inertiajs/react'
 import { PageProps } from '@/types'
 import PlayCircleOutlinedIcon from '@mui/icons-material/PlayCircleOutlined'
@@ -55,7 +55,7 @@ const Project: React.FC<PageProps> = ({ auth }) => {
     }
 
     return (
-        <AdminLayout user={auth.user}>
+        <Layout user={auth.user}>
             <Head title="プロジェクト" />
 
             <div className="h-14 overflow-hidden pb-[10px] w-full">
@@ -221,7 +221,7 @@ const Project: React.FC<PageProps> = ({ auth }) => {
                     </div>
                 </div>
             </div>
-        </AdminLayout>
+        </Layout>
     )
 }
 

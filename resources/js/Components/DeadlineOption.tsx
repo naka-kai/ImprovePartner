@@ -7,19 +7,6 @@ import { Typography } from '@mui/material'
 const DeadlineOption: React.FC = () => {
     const [selectedDeadlineIds, setSelectedDeadlineIds] = useState<number[]>([]) // 選択中の締切日ID
 
-    // 締切日を文字列に変換する
-    const toStringDeadline = (num: number): string => {
-        if (num === DeadlineOptions.today) {
-            return '今日'
-        } else if (num === DeadlineOptions.threeDaysLater) {
-            return '3日後'
-        } else if (num === DeadlineOptions.oneWeekLater) {
-            return '1週間後'
-        } else {
-            throw new Error('不正な値を検出: DeadlineOptions=' + num)
-        }
-    }
-
     // 締切日の選択中のIDを管理する
     const handleDeadlineCheckboxChange = (
         e: React.ChangeEvent<HTMLInputElement>
@@ -40,24 +27,22 @@ const DeadlineOption: React.FC = () => {
             <div>
                 {Object.values(DeadlineOptions).map((deadline) => (
                     <FormControlLabel
-                        key={deadline}
+                        key={deadline.value}
                         control={
                             <Checkbox
                                 sx={{ display: 'none' }}
-                                value={deadline}
-                                checked={selectedDeadlineIds.includes(deadline)}
+                                value={deadline.value}
+                                checked={selectedDeadlineIds.includes(
+                                    deadline.value
+                                )}
                                 onChange={(e) => {
                                     handleDeadlineCheckboxChange(e)
                                 }}
                             />
                         }
-                        label={
-                            <Typography sx={{ fontSize: 13 }}>
-                                {toStringDeadline(deadline)}
-                            </Typography>
-                        }
+                        label={deadline.label}
                         className={
-                            selectedDeadlineIds.includes(deadline)
+                            selectedDeadlineIds.includes(deadline.value)
                                 ? 'bg-sky-300 py-1 px-4 rounded-sm border-sky-300 border'
                                 : 'py-1 px-4 rounded-sm border-gray-200 border'
                         }

@@ -1,6 +1,8 @@
 import AdminLayout from '@/Layouts/AdminLayout'
 import { Head } from '@inertiajs/react'
 import { PageProps } from '@/types'
+import { MyTaskExtensionMenu, MyTaskMenu } from '@/consts/MyTaskConst'
+import TableRow from '@/Components/TableRow'
 import PlayCircleOutlinedIcon from '@mui/icons-material/PlayCircleOutlined'
 import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined'
 import Checkbox from '@/Components/Defaults/Checkbox'
@@ -62,62 +64,13 @@ const MyTask: React.FC<PageProps> = ({ auth }) => {
                     <AddButton data="タスク" />
                     <div>
                         <SortMenu
-                            extensionSortMenu={MyTaskSortExtensionMenu}
-                            customSortMenu={MyTaskSortMenu}
+                            extensionMenu={MyTaskExtensionMenu}
+                            customMenu={MyTaskMenu}
                         />
-                        <div>
-                            {MyTaskInfo.map((task) => (
-                                <div
-                                    key={task.id}
-                                    className="flex items-center justify-between border border-gray-300 p-1 my-1"
-                                >
-                                    <Button className="flex items-center justify-start w-1/3">
-                                        <IconComponent
-                                            sx={{
-                                                fontSize: 35,
-                                                width: '16.666667%',
-                                                textAlign: 'center',
-                                                color: '#38bdf8',
-                                            }}
-                                            onClick={() => setIsStop(!isStop)}
-                                        />
-                                        <p className="w-5/6 text-left">
-                                            {task.title}
-                                        </p>
-                                    </Button>
-                                    <div className="flex items-center justify-end w-2/3">
-                                        <p className="w-1/12 text-center">
-                                            {toStringPriority(task.priority)}
-                                        </p>
-                                        <p className="w-2/12 text-center">
-                                            {toDate(task.scheduled_start_day)}
-                                        </p>
-                                        <p className="w-2/12 text-center">
-                                            {toDate(task.scheduled_end_day)}
-                                        </p>
-                                        <p className="w-1/12 text-center">
-                                            {task.progress_rate}％
-                                        </p>
-                                        <p className="w-2/12 text-center">
-                                            {toTime(task.working_hours)}
-                                        </p>
-                                        <p className="w-2/12 text-center">
-                                            {toTime(task.estimated_time)}
-                                        </p>
-                                        <p className="w-2/12 text-center">
-                                            {toTime(task.think_estimated_time)}
-                                        </p>
-                                        <p className="w-1/12 text-center">
-                                            {task.status !== 3 ? (
-                                                <Checkbox />
-                                            ) : (
-                                                <Checkbox defaultChecked />
-                                            )}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                        <TableRow
+                            extensionMenu={MyTaskExtensionMenu}
+                            customMenu={MyTaskMenu}
+                        />
                     </div>
                     <AddButton data="タスク" />
                 </div>

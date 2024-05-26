@@ -1,5 +1,5 @@
 import {
-    SortMenuType,
+    MenuType,
     StatusOptionsType,
     StatusOptions,
     PriorityOptionsType,
@@ -23,49 +23,58 @@ export interface MyTaskType {
 }
 
 // 並び替えメニューの左側のデータ一覧（'タスク名'や'プロジェクト名'など、幅を大きくとるもの）
-export const MyTaskSortExtensionMenu: SortMenuType[] = [
+export const MyTaskExtensionMenu: MenuType[] = [
     {
-        name: 'タスク名',
+        title: 'タスク名',
+        name: 'title',
         width: 'w-5/6',
     },
 ]
 
 // 並び替えメニューの右側のデータ一覧
-export const MyTaskSortMenu: SortMenuType[] = [
+export const MyTaskMenu: MenuType[] = [
     {
-        name: '優先度',
+        title: '優先度',
+        name: 'priority',
         width: 'w-1/12',
     },
     {
-        name: '開始予定日',
+        title: '開始予定日',
+        name: 'scheduled_start_day',
         width: 'w-2/12',
     },
     {
-        name: '締切日',
+        title: '締切日',
+        name: 'scheduled_end_day',
         width: 'w-2/12',
     },
     {
-        name: '進捗率',
+        title: '進捗率',
+        name: 'progress_rate',
         width: 'w-1/12',
     },
     {
-        name: '作業時間',
+        title: '作業時間',
+        name: 'working_hours',
         width: 'w-2/12',
     },
     {
-        name: '見積時間',
+        title: '見積時間',
+        name: 'estimated_time',
         width: 'w-2/12',
     },
     {
-        name: '予想見積時間',
+        title: '予想見積時間',
+        name: 'think_estimated_time',
         width: 'w-2/12',
     },
     {
-        name: '完了',
+        title: '完了',
+        name: 'status',
         width: 'w-1/12',
     },
 ] as const
-type MyTaskSortMenu = (typeof MyTaskSortMenu)[keyof typeof MyTaskSortMenu]
+type MyTaskMenu = (typeof MyTaskMenu)[keyof typeof MyTaskMenu]
 
 // マイタスクのデータ一覧
 export const MyTaskInfo: MyTaskType[] = [

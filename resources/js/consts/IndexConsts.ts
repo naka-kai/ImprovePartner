@@ -3,16 +3,25 @@
  */
 
 // 並び替えメニューの型
-export interface SortMenuType {
+export interface MenuType {
+    title: string
     name: string
     width: string
 }
 
+// 表一行の型
+export interface TableRowType {
+    width: MenuType['width']
+    alignment: 'left' | 'center' | 'right'
+    data: string | PriorityOptionsType | Date | number | StatusOptionsType
+    type: MenuType['name']
+}
+
 // ステータス
 export const StatusOptions = {
-    notStarted: 1, // 未着手
-    working: 2, // 進行中
-    completed: 3, // 完了
+    notStarted: { value: 1, label: '未着手' },
+    working: { value: 2, label: '進行中' },
+    completed: { value: 3, label: '完了' },
 } as const
 
 // ステータスの型
@@ -21,10 +30,10 @@ export type StatusOptionsType =
 
 // 締切日
 export const DeadlineOptions = {
-    today: 1,
-    threeDaysLater: 2,
-    oneWeekLater: 3,
-} as const
+    today: { value: 1, label: '今日' },
+    threeDaysLater: { value: 2, label: '3日後' },
+    oneWeekLater: { value: 3, label: '1週間後' },
+}
 
 // 締切日の型
 export type DeadlineOptionsType =
@@ -32,9 +41,9 @@ export type DeadlineOptionsType =
 
 // 優先度
 export const PriorityOptions = {
-    high: 1,
-    middle: 2,
-    low: 3,
+    high: { value: 1, label: '高' },
+    middle: { value: 2, label: '中' },
+    low: { value: 3, label: '低' },
 } as const
 
 // 優先度の型

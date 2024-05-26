@@ -20,18 +20,6 @@ const StatusOption: React.FC = () => {
             )
         }
     }
-    // ステータスを文字列に変換する
-    const toStringStatus = (num: number): string => {
-        if (num === StatusOptions.completed) {
-            return '完了'
-        } else if (num === StatusOptions.working) {
-            return '進行中'
-        } else if (num === StatusOptions.notStarted) {
-            return '未着手'
-        } else {
-            throw new Error('不正な値を検出: StatusOptions=' + num)
-        }
-    }
 
     return (
         <div className="flex flex-col items-center">
@@ -39,24 +27,22 @@ const StatusOption: React.FC = () => {
             <div>
                 {Object.values(StatusOptions).map((status) => (
                     <FormControlLabel
-                        key={status}
+                        key={status.value}
                         control={
                             <Checkbox
                                 sx={{ display: 'none' }}
-                                value={status}
-                                checked={selectedStatusIds.includes(status)}
+                                value={status.value}
+                                checked={selectedStatusIds.includes(
+                                    status.value
+                                )}
                                 onChange={(e) => {
                                     handleStatusCheckboxChange(e)
                                 }}
                             />
                         }
-                        label={
-                            <Typography sx={{ fontSize: 13 }}>
-                                {toStringStatus(status)}
-                            </Typography>
-                        }
+                        label={status.label}
                         className={
-                            selectedStatusIds.includes(status)
+                            selectedStatusIds.includes(status.value)
                                 ? 'bg-sky-300 py-1 px-4 rounded-sm border-sky-300 border'
                                 : 'py-1 px-4 rounded-sm border-gray-200 border'
                         }

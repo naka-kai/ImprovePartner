@@ -13,7 +13,7 @@ export default function Layout({
     return (
         <>
             <div className="min-h-screen flex">
-                <nav className="bg-sky-300 w-64 h-screen">
+                <nav className="bg-sky-300 w-64 h-screen border-r border-gray-400">
                     <Link
                         href="/"
                         className="hover:opacity-70 block p-2 text-center"
@@ -28,7 +28,11 @@ export default function Layout({
                     {MainSidebarInfo.map((item) => (
                         <div
                             key={item.key.toString()}
-                            className="hover:opacity-70 p-2"
+                            className={
+                                location.pathname === item.href
+                                    ? 'bg-white hover:opacity-70 p-2'
+                                    : 'hover:opacity-70 p-2'
+                            }
                         >
                             <Link
                                 href={item.href}

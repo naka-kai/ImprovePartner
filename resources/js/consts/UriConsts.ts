@@ -2,14 +2,14 @@ export enum UriEnum {
     // マイタスク
     MyTask = '/',
 
-    // プロジェクト管理
+    // プロジェクト
     Project = '/project',
 
-    // チーム管理
-    Team = '/team',
-
-    // 取引先管理
+    // 取引先
     Client = '/client',
+
+    // メンバー
+    Member = '/member',
 
     // ダッシュボード
     Dashboard = '/dashboard',

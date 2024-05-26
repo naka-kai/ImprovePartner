@@ -17,6 +17,7 @@ const SortMenu: React.FC<Props> = ({ extensionMenu, customMenu }) => {
                         key={key + 100}
                         menu={menu.title}
                         width={menu.width}
+                        colorNum="400"
                     />
                 ))}
             </div>
@@ -26,6 +27,7 @@ const SortMenu: React.FC<Props> = ({ extensionMenu, customMenu }) => {
                         key={key}
                         menu={menu.title}
                         width={menu.width}
+                        colorNum="400"
                     />
                 ))}
             </div>

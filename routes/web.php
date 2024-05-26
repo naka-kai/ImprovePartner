@@ -37,6 +37,9 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/', function () {
         return Inertia::render('Admin/MyTask');
     });
+    Route::get('/project', function () {
+        return Inertia::render('Admin/Project');
+    });
 });
 
 Route::middleware('auth')->group(function () {

@@ -7,8 +7,8 @@ import React, { useState } from 'react'
 import { Button } from '@mui/base'
 import {
     MyTaskInfo,
-    MyTaskSortExtensionMenu,
-    MyTaskSortMenu,
+    MyTaskExtensionMenu,
+    MyTaskMenu,
 } from '@/consts/MyTaskConst'
 import SortMenu from '@/Components/SortMenu'
 import StatusOption from '@/Components/StatusOption'
@@ -43,11 +43,11 @@ const Project: React.FC<PageProps> = ({ auth }) => {
 
     // 優先度を文字列に変換する
     const toStringPriority = (num: number): string => {
-        if (num === PriorityOptions.high) {
+        if (num === PriorityOptions.high.value) {
             return '高'
-        } else if (num === PriorityOptions.middle) {
+        } else if (num === PriorityOptions.middle.value) {
             return '中'
-        } else if (num === PriorityOptions.low) {
+        } else if (num === PriorityOptions.low.value) {
             return '低'
         } else {
             throw new Error('不正な値を検出: PriorityOptions=' + num)
@@ -154,8 +154,8 @@ const Project: React.FC<PageProps> = ({ auth }) => {
                         <AddButton data="タスク" />
                         <div>
                             <SortMenu
-                                extensionSortMenu={MyTaskSortExtensionMenu}
-                                customSortMenu={MyTaskSortMenu}
+                                extensionMenu={MyTaskExtensionMenu}
+                                customMenu={MyTaskMenu}
                             />
                             <div>
                                 {MyTaskInfo.map((task) => (
@@ -181,9 +181,7 @@ const Project: React.FC<PageProps> = ({ auth }) => {
                                         </Button>
                                         <div className="flex items-center justify-end w-2/3">
                                             <p className="w-1/12 text-center">
-                                                {toStringPriority(
-                                                    task.priority
-                                                )}
+                                                {task.priority.label}
                                             </p>
                                             <p className="w-2/12 text-center">
                                                 {toDate(
@@ -208,7 +206,7 @@ const Project: React.FC<PageProps> = ({ auth }) => {
                                                 )}
                                             </p>
                                             <p className="w-1/12 text-center">
-                                                {task.status !== 3 ? (
+                                                {task.status.value !== 3 ? (
                                                     <Checkbox />
                                                 ) : (
                                                     <Checkbox defaultChecked />

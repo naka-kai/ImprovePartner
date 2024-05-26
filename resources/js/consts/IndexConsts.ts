@@ -2,12 +2,17 @@
  * 共通
  */
 
+import { MyTaskType } from './MyTaskConst'
+
 // 並び替えメニューの型
 export interface MenuType {
     title: string
     name: string
     width: string
 }
+
+// 表一行のdataのキーとなる可能性がある型
+export type DataType = MyTaskType
 
 // 表一行の型
 export interface TableRowType {

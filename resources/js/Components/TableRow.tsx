@@ -4,7 +4,7 @@ import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined'
 import { MyTaskInfo } from '@/consts/MyTaskConst'
 import { Button } from '@mui/material'
 import TableData from './Molecules/TableData'
-import { MenuType } from '@/consts/IndexConsts'
+import { DataType, MenuType } from '@/consts/IndexConsts'
 
 type Props = {
     extensionMenu: MenuType[]
@@ -18,6 +18,21 @@ const TableRow: React.FC<Props> = ({ extensionMenu, customMenu }) => {
     const IconComponent = isStop
         ? PlayCircleOutlinedIcon
         : StopCircleOutlinedIcon
+
+    // dataの型の絞り込みを行う
+    const isMyDataKey = (key: string): key is keyof DataType => {
+        return [
+            'title',
+            'status',
+            'priority',
+            'scheduled_start_day',
+            'scheduled_end_day',
+            'working_hours',
+            'estimated_time',
+            'think_estimated_time',
+            'progress_rate',
+        ].includes(key)
+    }
 
     return (
         <div>
@@ -40,16 +55,20 @@ const TableRow: React.FC<Props> = ({ extensionMenu, customMenu }) => {
                         <p className="w-5/6 text-left">{task.title}</p>
                     </div>
                     <div className="flex items-center justify-end w-2/3">
-                        {/* {Object.values(customMenu).map((menu, key) => (
+                        {Object.values(customMenu).map((menu, key) => (
                             <TableData
                                 key={key}
                                 width={menu.width}
                                 alignment="center"
-                                data={task.priority.label}
+                                data={
+                                    isMyDataKey(menu.name)
+                                        ? task[menu.name]
+                                        : ''
+                                }
                                 type={menu.name}
                             />
-                        ))} */}
-                        <TableData
+                        ))}
+                        {/* <TableData
                             key="w-1/12"
                             width="center"
                             alignment="center"
@@ -97,7 +116,7 @@ const TableRow: React.FC<Props> = ({ extensionMenu, customMenu }) => {
                             alignment="center"
                             data={task.status.value}
                             type="status"
-                        />
+                        /> */}
                     </div>
                 </div>
             ))}

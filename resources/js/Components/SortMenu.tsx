@@ -1,5 +1,5 @@
 import React from 'react'
-import MenuButton from './Molecules/SortMenuButton'
+import MenuButton from './Molecules/SortButton'
 import { MenuType } from '@/consts/IndexConsts'
 
 type Props = {

@@ -1,7 +1,7 @@
 import AdminLayout from '@/Layouts/AdminLayout'
 import { Head } from '@inertiajs/react'
 import { PageProps } from '@/types'
-import { MyTaskSortExtensionMenu, MyTaskSortMenu } from '@/consts/MyTaskConst'
+import { MyTaskExtensionMenu, MyTaskMenu } from '@/consts/MyTaskConst'
 import SortMenu from '@/Components/SortMenu'
 import StatusOption from '@/Components/StatusOption'
 import DeadlineOption from '@/Components/DeadlineOption'
@@ -23,10 +23,13 @@ export default function MyTask({ auth }: PageProps) {
                     </button>
                     <div>
                         <SortMenu
-                            extensionSortMenu={MyTaskSortExtensionMenu}
-                            customSortMenu={MyTaskSortMenu}
+                            extensionMenu={MyTaskExtensionMenu}
+                            customMenu={MyTaskMenu}
                         />
-                        <TableRow />
+                        <TableRow
+                            extensionMenu={MyTaskExtensionMenu}
+                            customMenu={MyTaskMenu}
+                        />
                     </div>
                     <button className="my-3 text-gray-500">
                         ＋タスクを追加

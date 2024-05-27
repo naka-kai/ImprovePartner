@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import PlayCircleOutlinedIcon from '@mui/icons-material/PlayCircleOutlined'
 import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined'
-import { MyTaskInfo } from '@/consts/MyTaskConst'
 import { Button } from '@mui/material'
 import TableData from './Molecules/TableData'
 import { DataType, MenuType } from '@/consts/IndexConsts'
@@ -9,9 +8,10 @@ import { DataType, MenuType } from '@/consts/IndexConsts'
 type Props = {
     extensionMenu: MenuType[]
     customMenu: MenuType[]
+    info: DataType[]
 }
 
-const TableRow: React.FC<Props> = ({ extensionMenu, customMenu }) => {
+const TableRow: React.FC<Props> = ({ extensionMenu, customMenu, info }) => {
     const [isStop, setIsStop] = useState<boolean>(true) // タスクが停止中かどうか
 
     // 再生中か停止中かでアイコンを切り替える
@@ -36,9 +36,9 @@ const TableRow: React.FC<Props> = ({ extensionMenu, customMenu }) => {
 
     return (
         <div>
-            {MyTaskInfo.map((task) => (
+            {info.map((infoData) => (
                 <div
-                    key={task.id}
+                    key={infoData.id}
                     className="flex items-center justify-between border border-gray-300 p-1 my-1"
                 >
                     <div className="flex items-center justify-start w-1/3">
@@ -52,7 +52,7 @@ const TableRow: React.FC<Props> = ({ extensionMenu, customMenu }) => {
                                 onClick={() => setIsStop(!isStop)}
                             />
                         </Button>
-                        <p className="w-5/6 text-left">{task.title}</p>
+                        <p className="w-5/6 text-left">{infoData.title}</p>
                     </div>
                     <div className="flex items-center justify-end w-2/3">
                         {Object.values(customMenu).map((menu, key) => (
@@ -62,7 +62,7 @@ const TableRow: React.FC<Props> = ({ extensionMenu, customMenu }) => {
                                 alignment="center"
                                 data={
                                     isMyDataKey(menu.name)
-                                        ? task[menu.name]
+                                        ? infoData[menu.name]
                                         : ''
                                 }
                                 type={menu.name}

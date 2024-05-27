@@ -1,7 +1,11 @@
 import Layout from '@/Layouts/Layout'
 import { Head } from '@inertiajs/react'
 import { PageProps } from '@/types'
-import { MyTaskExtensionMenu, MyTaskMenu } from '@/consts/MyTaskConst'
+import {
+    MyTaskExtensionMenu,
+    MyTaskInfo,
+    MyTaskMenu,
+} from '@/consts/MyTaskConst'
 import TableRow from '@/Components/TableRow'
 import React from 'react'
 import SortMenu from '@/Components/SortMenu'
@@ -29,6 +33,7 @@ const MyTask: React.FC<PageProps> = ({ auth }) => {
                         <TableRow
                             extensionMenu={MyTaskExtensionMenu}
                             customMenu={MyTaskMenu}
+                            info={MyTaskInfo}
                         />
                     </div>
                     <AddButton data="タスク" />

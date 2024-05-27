@@ -11,7 +11,7 @@ export interface MenuType {
     width: string
 }
 
-// 表一行のdataのキーとなる可能性がある型
+// 表一行のdataのキーとなる可能性がある型（ここに追加していく）
 export type DataType = MyTaskType
 
 // 表一行の型

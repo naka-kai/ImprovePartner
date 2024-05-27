@@ -35,12 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/project', function () {
         return Inertia::render('Project');
     });
-    Route::get('/team', function () {
-        return Inertia::render('Team');
-    });
-    Route::get('/client', function () {
-        return Inertia::render('Client');
-    });
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     });
@@ -52,6 +46,15 @@ Route::middleware('auth')->group(function () {
     });
     Route::get('/setting', function () {
         return Inertia::render('Setting');
+    });
+});
+
+Route::group(['middleware' => ['auth', 'can:isAdmin']], function () {
+    Route::get('/member', function () {
+        return Inertia::render('Member');
+    });
+    Route::get('/client', function () {
+        return Inertia::render('Client');
     });
 });
 

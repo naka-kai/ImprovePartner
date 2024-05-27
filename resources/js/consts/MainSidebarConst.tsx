@@ -15,6 +15,7 @@ export interface MainSidebarMenuType<T> {
     title: string
     href: UriEnum
     svg: React.ReactNode
+    isAdmin?: string
     children_array?: {
         key: T
         title: string
@@ -54,12 +55,14 @@ export const MainSidebarInfo: MainSidebarMenuType<MainSidebarKeyEum>[] = [
         title: '取引先',
         href: UriEnum.Client,
         svg: <BusinessOutlinedIcon sx={{ fontSize: 30 }} />,
+        isAdmin: 'isAdmin',
     },
     {
         key: MainSidebarKeyEum.Member,
         title: 'メンバー',
         href: UriEnum.Member,
         svg: <Diversity3OutlinedIcon sx={{ fontSize: 30 }} />,
+        isAdmin: 'isAdmin',
     },
     {
         key: MainSidebarKeyEum.Dashboard,

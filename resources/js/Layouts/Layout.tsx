@@ -1,15 +1,40 @@
-import { PropsWithChildren, ReactNode } from 'react'
+import { PropsWithChildren, useEffect, useState } from 'react'
 import { User } from '@/types'
 import { MainSidebarInfo } from '@/consts/MainSidebarConst'
 import Dropdown from '@/Components/Defaults/Dropdown'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
+import axios from 'axios'
+
+interface Permissions {
+    [key: string]: boolean
+}
 
 export default function Layout({
     user,
     children,
 }: PropsWithChildren<{ user: User }>) {
+    const [permissions, setPermissions] = useState<Permissions>({})
+    const [loading, setLoading] = useState<boolean>(true)
+
+    useEffect(() => {
+        axios
+            .get('/api/user/permissions')
+            .then((response) => {
+                setPermissions(response.data)
+                setLoading(false)
+            })
+            .catch((error) => {
+                console.error('エラーが起きました: ', error)
+                setLoading(false)
+            })
+    }, [])
+
+    if (loading) {
+        return <p>Loading...</p>
+    }
+
     return (
         <>
             <div className="min-h-screen flex">
@@ -25,29 +50,35 @@ export default function Layout({
                     >
                         ImprovePartner
                     </Link>
-                    {MainSidebarInfo.map((item) => (
-                        <div
-                            key={item.key.toString()}
-                            className={
-                                location.pathname === item.href
-                                    ? 'bg-white hover:opacity-70 p-2'
-                                    : 'hover:opacity-70 p-2'
-                            }
-                        >
-                            <Link
-                                href={item.href}
-                                color="inherit"
-                                underline="none"
+                    {MainSidebarInfo.map((item) => {
+                        if (item.isAdmin && !permissions[item.isAdmin]) {
+                            return null
+                        }
+
+                        return (
+                            <div
+                                key={item.key.toString()}
+                                className={
+                                    location.pathname === item.href
+                                        ? 'bg-white hover:opacity-70 p-2'
+                                        : 'hover:opacity-70 p-2'
+                                }
                             >
-                                <div className="flex items-center justify-start">
-                                    <div className="mr-1">{item.svg}</div>
-                                    <Typography fontSize={18}>
-                                        {item.title}
-                                    </Typography>
-                                </div>
-                            </Link>
-                        </div>
-                    ))}
+                                <Link
+                                    href={item.href}
+                                    color="inherit"
+                                    underline="none"
+                                >
+                                    <div className="flex items-center justify-start">
+                                        <div className="mr-1">{item.svg}</div>
+                                        <Typography fontSize={18}>
+                                            {item.title}
+                                        </Typography>
+                                    </div>
+                                </Link>
+                            </div>
+                        )
+                    })}
                 </nav>
                 <div className="w-full">
                     <header className="h-16 overflow-hidden pb-[10px] w-full">

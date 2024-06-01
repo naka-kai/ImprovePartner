@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware('auth:api')->get('/user/permissions', function (Request $request) {
+    return response()->json([
+        'isAdmin' => $request->user->can('isAdmin'),
+    ]);
+});

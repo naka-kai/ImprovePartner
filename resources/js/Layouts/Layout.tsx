@@ -7,14 +7,30 @@ import Typography from '@mui/material/Typography'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import axios from 'axios'
 
+// -- Task005
 interface Permissions {
     [key: string]: boolean
 }
+// -- /Task005
 
 export default function Layout({
     user,
     children,
 }: PropsWithChildren<{ user: User }>) {
+// -- Task021-01
+    const logoutSubmit = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault()
+
+        axios.post('/api/logout').then((res) => {
+            if (res.data.status === 200) {
+                localStorage.removeItem('auth_token')
+                localStorage.removeItem('auth_name')
+                window.location.href = '/login'
+            }
+        })
+    }
+// -- /Task021-01
+// -- Task005
     const [permissions, setPermissions] = useState<Permissions>({})
     const [loading, setLoading] = useState<boolean>(true)
 
@@ -34,6 +50,7 @@ export default function Layout({
     if (loading) {
         return <p>Loading...</p>
     }
+// -- /Task005
 
     return (
         <>
@@ -102,9 +119,10 @@ export default function Layout({
 
                                         <Dropdown.Content>
                                             <Dropdown.Link
-                                                href={route('logout')}
+                                                href="/logout"
                                                 method="post"
                                                 as="button"
+                                                onClick={logoutSubmit}
                                             >
                                                 ログアウト
                                             </Dropdown.Link>

@@ -30,6 +30,12 @@ Route::get('/', function () {
 Route::get('/select-auth', function () {
     return Inertia::render('SelectAuth');
 });
+Route::get('/login', function () {
+    return Inertia::render('Auth/Login');
+});
+Route::get('/register', function () {
+    return Inertia::render('Auth/Register');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/project', function () {
@@ -61,4 +67,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';

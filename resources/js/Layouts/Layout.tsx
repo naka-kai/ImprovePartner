@@ -5,11 +5,23 @@ import Dropdown from '@/Components/Defaults/Dropdown'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
+import axios from 'axios'
 
 export default function Layout({
     user,
     children,
 }: PropsWithChildren<{ user: User }>) {
+    const logoutSubmit = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault()
+
+        axios.post('/api/logout').then((res) => {
+            if (res.data.status === 200) {
+                localStorage.removeItem('auth_token')
+                localStorage.removeItem('auth_name')
+                window.location.href = '/login'
+            }
+        })
+    }
     return (
         <>
             <div className="min-h-screen flex">
@@ -71,9 +83,10 @@ export default function Layout({
 
                                         <Dropdown.Content>
                                             <Dropdown.Link
-                                                href={route('logout')}
+                                                href="/logout"
                                                 method="post"
                                                 as="button"
+                                                onClick={logoutSubmit}
                                             >
                                                 ログアウト
                                             </Dropdown.Link>

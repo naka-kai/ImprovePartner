@@ -32,6 +32,8 @@
         "@mui/x-date-pickers": "^7.4.0",
         "@react-icons/all-files": "^4.1.0",
         "date-fns": "^3.6.0",
-        "dayjs": "^1.11.11"
+        "dayjs": "^1.11.11",
+        "sweetalert": "^2.1.2",
+        "zustand": "^4.5.2"
     }
 }

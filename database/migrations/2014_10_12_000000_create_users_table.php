@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('tel', 255)->comment('電話番号');
             $table->date('birthday')->comment('生年月日');
             $table->text('other')->nullable()->comment('その他');
-            $table->integer('isAdmin')->default(0)->comment('管理者フラグ(0: メンバー, 1: 管理者)');
+            $table->boolean('is_admin')->default(false)->comment('管理者フラグ(false: メンバー, true: 管理者)');
             $table->string('email')->unique()->comment('メールアドレス');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->comment('パスワード');

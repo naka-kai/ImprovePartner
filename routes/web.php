@@ -17,10 +17,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('MyTask', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-    ]);
+    return Inertia::render('MyTask');
 });
 
 // Route::get('/dashboard', function () {
@@ -32,12 +29,15 @@ Route::get('/select-auth', function () {
 });
 Route::get('/login', function () {
     return Inertia::render('Auth/Login');
-});
+})->name('login');
 Route::get('/register', function () {
     return Inertia::render('Auth/Register');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth:sanctum', 'ability:view-admin, view-member'])->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('MyTask');
+    });
     Route::get('/project', function () {
         return Inertia::render('Project');
     });
@@ -55,7 +55,17 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::group(['middleware' => ['auth', 'can:isAdmin']], function () {
+// Route::middleware(['auth:sanctum', 'can:view-admin'])->group(function () {
+//     Route::get('/member', function () {
+//         return Inertia::render('Member');
+//     });
+//     Route::get('/client', function () {
+//         return Inertia::render('Client');
+//     });
+// });
+
+// 管理者権限のあるユーザー
+Route::middleware(['auth:sanctum', 'abilities:view-admin'])->group(function () {
     Route::get('/member', function () {
         return Inertia::render('Member');
     });

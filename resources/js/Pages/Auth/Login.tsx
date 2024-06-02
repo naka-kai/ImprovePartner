@@ -38,6 +38,9 @@ const Login: React.FC = () => {
                 if (res.data.status === 200) {
                     localStorage.setItem('auth_token', res.data.token)
                     localStorage.setItem('auth_name', res.data.username)
+                    axios.defaults.headers.common[
+                        'Authorization'
+                    ] = `Bearer ${res.data.token}`
                     window.location.href = '/'
                 } else if (res.data.status === 401) {
                     swal('Warning', res.data.message, 'warning')

@@ -23,28 +23,16 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             0 => [
-                'last_name' => '管理者',
-                'first_name' => 'テスト',
-                'last_name_kana' => 'カンリシャ',
-                'first_name_kana' => 'テスト',
-                'tel' => '000-0000-0000',
-                'birthday' => '1980-05-10',
-                'other' => '',
-                'isAdmin' => 1,
+                'name' => '管理者',
+                'is_admin' => 1,
                 'email' => 'admin_test@test.com',
                 'password' => static::$password ??= Hash::make('password'),
                 'created_at' => new Carbon(),
                 'updated_at' => new Carbon()
             ],
             1 => [
-                'last_name' => 'メンバー',
-                'first_name' => 'テスト',
-                'last_name_kana' => 'メンバー',
-                'first_name_kana' => 'テスト',
-                'tel' => '000-0000-0000',
-                'birthday' => '1990-10-30',
-                'other' => '',
-                'isAdmin' => 0,
+                'name' => 'メンバー',
+                'is_admin' => 0,
                 'email' => 'member_test@test.com',
                 'password' => static::$password ??= Hash::make('password'),
                 'created_at' => new Carbon(),

@@ -1,57 +1,15 @@
-import { PropsWithChildren, useEffect, useState } from 'react'
+import { PropsWithChildren } from 'react'
 import { User } from '@/types'
 import { MainSidebarInfo } from '@/consts/MainSidebarConst'
 import Dropdown from '@/Components/Defaults/Dropdown'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
-import axios from 'axios'
-
-// -- Task005
-interface Permissions {
-    [key: string]: boolean
-}
-// -- /Task005
 
 export default function Layout({
     user,
     children,
 }: PropsWithChildren<{ user: User }>) {
-// -- Task021-01
-    const logoutSubmit = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        e.preventDefault()
-
-        axios.post('/api/logout').then((res) => {
-            if (res.data.status === 200) {
-                localStorage.removeItem('auth_token')
-                localStorage.removeItem('auth_name')
-                window.location.href = '/login'
-            }
-        })
-    }
-// -- /Task021-01
-// -- Task005
-    const [permissions, setPermissions] = useState<Permissions>({})
-    const [loading, setLoading] = useState<boolean>(true)
-
-    useEffect(() => {
-        axios
-            .get('/api/user/permissions')
-            .then((response) => {
-                setPermissions(response.data)
-                setLoading(false)
-            })
-            .catch((error) => {
-                console.error('エラーが起きました: ', error)
-                setLoading(false)
-            })
-    }, [])
-
-    if (loading) {
-        return <p>Loading...</p>
-    }
-// -- /Task005
-
     return (
         <>
             <div className="min-h-screen flex">
@@ -68,10 +26,11 @@ export default function Layout({
                         ImprovePartner
                     </Link>
                     {MainSidebarInfo.map((item) => {
-                        if (item.isAdmin && !permissions[item.isAdmin]) {
-                            return null
+                        if (user.is_admin === 0) {
+                            if (item.isAdmin) {
+                                return null
+                            }
                         }
-
                         return (
                             <div
                                 key={item.key.toString()}
@@ -119,10 +78,9 @@ export default function Layout({
 
                                         <Dropdown.Content>
                                             <Dropdown.Link
-                                                href="/logout"
+                                                href={route('logout')}
                                                 method="post"
                                                 as="button"
-                                                onClick={logoutSubmit}
                                             >
                                                 ログアウト
                                             </Dropdown.Link>

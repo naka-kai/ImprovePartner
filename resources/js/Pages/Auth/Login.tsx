@@ -1,105 +1,126 @@
-import { Head } from '@inertiajs/react'
-import axios from 'axios'
-import React, { useState } from 'react'
-import swal from 'sweetalert'
+import { useEffect, FormEventHandler } from 'react'
+import Checkbox from '@/Components/Defaults/Checkbox'
+import GuestLayout from '@/Layouts/GuestLayout'
+import InputError from '@/Components/Defaults/InputError'
+import InputLabel from '@/Components/Defaults/InputLabel'
+import PrimaryButton from '@/Components/Defaults/PrimaryButton'
+import TextInput from '@/Components/Defaults/TextInput'
+import { Head, Link, useForm } from '@inertiajs/react'
 
-interface LoginInput {
-    email: string
-    password: string
-    error_list: {
-        name?: string
-        email?: string
-        password?: string
-        password_confirmation?: string
-    }
-}
-
-const Login: React.FC = () => {
-    const [loginInput, setLogin] = useState<LoginInput>({
+export default function Login({
+    status,
+    canResetPassword,
+}: {
+    status?: string
+    canResetPassword: boolean
+}) {
+    const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
-        error_list: {},
+        remember: false,
     })
 
-    const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setLogin({ ...loginInput, [e.target.name]: e.target.value })
-    }
+    useEffect(() => {
+        return () => {
+            reset('password')
+        }
+    }, [])
 
-    const loginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const submit: FormEventHandler = (e) => {
         e.preventDefault()
 
-        const data = {
-            email: loginInput.email,
-            password: loginInput.password,
-        }
-
-        axios.get('/sanctum/csrf-cookie').then((response) => {
-            axios.post('/api/login', data).then((res) => {
-                if (res.data.status === 200) {
-                    localStorage.setItem('auth_token', res.data.token)
-                    localStorage.setItem('auth_name', res.data.username)
-                    window.location.href = '/'
-                } else if (res.data.status === 401) {
-                    swal('Warning', res.data.message, 'warning')
-                } else {
-                    setLogin({
-                        ...loginInput,
-                        error_list: res.data.validation_errors,
-                    })
-                }
-            })
-        })
+        post(route('login'))
     }
+
     return (
-        <div className="w-full">
+        <GuestLayout>
             <Head title="ログイン" />
-            <div className="flex justify-center items-center h-screen">
-                <div className="border border-gray-400 w-1/2 flex flex-col justify-start items-center">
-                    <h3 className="text-xl font-bold pt-6 mb-2">ログイン</h3>
-                    <form onSubmit={loginSubmit}>
-                        <div className="py-2">
-                            <div className="mb-2">
-                                <label>メールアドレス</label>
-                            </div>
-                            <div>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={loginInput.email}
-                                    onChange={handleInput}
-                                    className="rounded w-64"
-                                />
-                            </div>
-                            <p>{loginInput.error_list.email}</p>
-                        </div>
-                        <div className="py-2">
-                            <div className="mb-2">
-                                <label>パスワード</label>
-                            </div>
-                            <div>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    value={loginInput.password}
-                                    onChange={handleInput}
-                                    className="rounded w-64"
-                                />
-                            </div>
-                            <p>{loginInput.error_list.password}</p>
-                        </div>
-                        <div className="flex justify-center items-center py-4">
-                            <button
-                                type="submit"
-                                className="bg-sky-300 py-2 px-10 mb-3 rounded"
-                            >
-                                ログイン
-                            </button>
-                        </div>
-                    </form>
+
+            {status && (
+                <div className="mb-4 font-medium text-sm text-green-600">
+                    {status}
                 </div>
-            </div>
-        </div>
+            )}
+
+            <form onSubmit={submit}>
+                <div>
+                    <InputLabel
+                        htmlFor="email"
+                        value="メールアドレス"
+                    />
+
+                    <TextInput
+                        id="email"
+                        type="email"
+                        name="email"
+                        value={data.email}
+                        className="mt-1 block w-full"
+                        autoComplete="username"
+                        isFocused={true}
+                        onChange={(e) => setData('email', e.target.value)}
+                    />
+
+                    <InputError
+                        message={errors.email}
+                        className="mt-2"
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel
+                        htmlFor="password"
+                        value="パスワード"
+                    />
+
+                    <TextInput
+                        id="password"
+                        type="password"
+                        name="password"
+                        value={data.password}
+                        className="mt-1 block w-full"
+                        autoComplete="current-password"
+                        onChange={(e) => setData('password', e.target.value)}
+                    />
+
+                    <InputError
+                        message={errors.password}
+                        className="mt-2"
+                    />
+                </div>
+
+                <div className="block mt-4">
+                    <label className="flex items-center">
+                        <Checkbox
+                            name="remember"
+                            checked={data.remember}
+                            onChange={(e) =>
+                                setData('remember', e.target.checked)
+                            }
+                        />
+                        <span className="ms-2 text-sm text-gray-600">
+                            次回から自動でログインする
+                        </span>
+                    </label>
+                </div>
+
+                <div className="flex items-center justify-end mt-4">
+                    {canResetPassword && (
+                        <Link
+                            href={route('password.request')}
+                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        >
+                            パスワードを忘れた場合
+                        </Link>
+                    )}
+
+                    <PrimaryButton
+                        className="ms-4"
+                        disabled={processing}
+                    >
+                        ログイン
+                    </PrimaryButton>
+                </div>
+            </form>
+        </GuestLayout>
     )
 }
-
-export default Login

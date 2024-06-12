@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -16,28 +15,14 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('MyTask', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-    ]);
-});
-
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::get('/select-auth', function () {
     return Inertia::render('SelectAuth');
 });
-Route::get('/login', function () {
-    return Inertia::render('Auth/Login');
-});
-Route::get('/register', function () {
-    return Inertia::render('Auth/Register');
-});
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('MyTask');
+    })->name('myTask');
     Route::get('/project', function () {
         return Inertia::render('Project');
     });
@@ -55,7 +40,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::group(['middleware' => ['auth', 'can:isAdmin']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'can:isAdmin']], function () {
     Route::get('/member', function () {
         return Inertia::render('Member');
     });
@@ -70,4 +55,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';

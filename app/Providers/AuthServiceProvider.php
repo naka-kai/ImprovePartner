@@ -25,12 +25,12 @@ class AuthServiceProvider extends ServiceProvider
 
         // 管理者
         Gate::define('isAdmin', function ($user) {
-            return ($user->isAdmin == 1);
+            return ($user->is_admin == 1);
         });
 
         // メンバー
         Gate::define('isMember', function ($user) {
-            return ($user->isAdmin == 0);
+            return ($user->is_admin == 0);
         });
     }
 }

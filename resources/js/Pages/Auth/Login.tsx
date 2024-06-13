@@ -103,22 +103,24 @@ export default function Login({
                     </label>
                 </div>
 
-                <div className="flex items-center justify-end mt-4">
+                <div className="flex flex-col items-center justify-end mt-5">
+                    <PrimaryButton disabled={processing}>
+                        ログイン
+                    </PrimaryButton>
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-3"
                         >
                             パスワードを忘れた場合
                         </Link>
                     )}
-
-                    <PrimaryButton
-                        className="ms-4"
-                        disabled={processing}
+                    <Link
+                        href={route('register')}
+                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-3"
                     >
-                        ログイン
-                    </PrimaryButton>
+                        新規登録はこちら
+                    </Link>
                 </div>
             </form>
         </GuestLayout>

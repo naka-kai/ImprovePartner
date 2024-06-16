@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('first_name', 255)->comment('名');
             $table->string('last_name_kana', 255)->comment('セイ');
             $table->string('first_name_kana', 255)->comment('メイ');
-            $table->string('tel', 255)->comment('電話番号');
+            $table->string('tel', 21)->comment('電話番号');
             $table->date('birthday')->comment('生年月日');
             $table->text('other')->nullable()->comment('その他');
-            $table->integer('is_admin')->default(0)->comment('管理者フラグ(0: メンバー, 1: 管理者)');
+            $table->boolean('is_admin')->default(0)->comment('管理者フラグ(false: メンバー, true: 管理者)');
             $table->string('email')->unique()->comment('メールアドレス');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->comment('パスワード');

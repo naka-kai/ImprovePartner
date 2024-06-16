@@ -26,7 +26,7 @@ export default function Layout({
                         ImprovePartner
                     </Link>
                     {MainSidebarInfo.map((item) => {
-                        if (user.is_admin === 0) {
+                        if (user.is_admin === false) {
                             if (item.isAdmin) {
                                 return null
                             }

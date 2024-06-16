@@ -15,9 +15,9 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/select-auth', function () {
-    return Inertia::render('SelectAuth');
-});
+// Route::get('/select-auth', function () {
+//     return Inertia::render('SelectAuth');
+// });
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/', function () {

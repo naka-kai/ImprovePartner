@@ -4,13 +4,20 @@ import InputError from '@/Components/Defaults/InputError'
 import InputLabel from '@/Components/Defaults/InputLabel'
 import PrimaryButton from '@/Components/Defaults/PrimaryButton'
 import TextInput from '@/Components/Defaults/TextInput'
-import { Head, Link, useForm } from '@inertiajs/react'
+import { Head, Link, useForm, usePage } from '@inertiajs/react'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import dayjs from 'dayjs'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
+import { PageProps } from '@/types'
+
+interface RegisterPageProps extends PageProps {
+    isAdmin: number
+}
 
 export default function Register() {
+    const { isAdmin } = usePage<RegisterPageProps>().props
+
     const { data, setData, post, processing, errors, reset } = useForm({
         last_name: '',
         first_name: '',
@@ -18,8 +25,9 @@ export default function Register() {
         first_name_kana: '',
         email: '',
         tel: '',
+        isAdmin,
+        other: '',
         birthday: dayjs(),
-        is_admin: false,
         password: '',
         password_confirmation: '',
     })
@@ -41,7 +49,7 @@ export default function Register() {
             <Head title="ユーザー登録" />
 
             <form onSubmit={submit}>
-                <div>
+                <div className="flex items-center">
                     <InputLabel
                         htmlFor="is_admin"
                         value="プラン"
@@ -49,14 +57,15 @@ export default function Register() {
 
                     <FormControlLabel
                         id="is_admin"
-                        name="is_admin"
                         disabled
-                        control={<Checkbox sx={{ display: 'none' }} />}
-                        label={
-                            data.is_admin === true ? '企業プラン' : '個人プラン'
+                        label={data.isAdmin === 1 ? '企業プラン' : '個人プラン'}
+                        sx={{ marginLeft: '0.5rem' }}
+                        control={
+                            <Checkbox
+                                sx={{ display: 'none' }}
+                                checked={data.isAdmin === 1 ? true : false}
+                            />
                         }
-                        checked={data.is_admin}
-                        sx={{ margin: 0 }}
                     />
                 </div>
 
@@ -74,7 +83,6 @@ export default function Register() {
                         autoComplete="last_name"
                         isFocused={true}
                         onChange={(e) => setData('last_name', e.target.value)}
-                        required
                     />
 
                     <InputError
@@ -97,7 +105,6 @@ export default function Register() {
                         autoComplete="first_name"
                         isFocused={true}
                         onChange={(e) => setData('first_name', e.target.value)}
-                        required
                     />
 
                     <InputError
@@ -122,7 +129,6 @@ export default function Register() {
                         onChange={(e) =>
                             setData('last_name_kana', e.target.value)
                         }
-                        required
                     />
 
                     <InputError
@@ -147,7 +153,6 @@ export default function Register() {
                         onChange={(e) =>
                             setData('first_name_kana', e.target.value)
                         }
-                        required
                     />
 
                     <InputError
@@ -170,7 +175,6 @@ export default function Register() {
                         className="mt-1 block w-full"
                         autoComplete="username"
                         onChange={(e) => setData('email', e.target.value)}
-                        required
                     />
 
                     <InputError
@@ -193,7 +197,6 @@ export default function Register() {
                         autoComplete="tel"
                         isFocused={true}
                         onChange={(e) => setData('tel', e.target.value)}
-                        required
                     />
 
                     <InputError
@@ -252,7 +255,6 @@ export default function Register() {
                         className="mt-1 block w-full"
                         autoComplete="new-password"
                         onChange={(e) => setData('password', e.target.value)}
-                        required
                     />
 
                     <InputError
@@ -277,7 +279,6 @@ export default function Register() {
                         onChange={(e) =>
                             setData('password_confirmation', e.target.value)
                         }
-                        required
                     />
 
                     <InputError

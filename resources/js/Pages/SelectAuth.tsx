@@ -1,5 +1,4 @@
 import { Head } from '@inertiajs/react'
-import * as React from 'react'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 
@@ -16,14 +15,14 @@ const SelectAuth = () => {
                 <Button
                     variant="outlined"
                     className="w-1/5"
-                    href="#contained-buttons"
+                    href={route('register', { isAdmin: 0 })}
                 >
                     個人利用
                 </Button>
                 <Button
                     variant="contained"
                     className="w-1/5"
-                    href="#contained-buttons"
+                    href={route('register', { isAdmin: 1 })}
                 >
                     企業として利用
                 </Button>

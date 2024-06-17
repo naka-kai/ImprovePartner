@@ -48,6 +48,20 @@ class MemberSeeder extends Seeder
                 'created_at' => new Carbon(),
                 'updated_at' => new Carbon()
             ],
+            1 => [
+                'last_name' => 'test',
+                'first_name' => 'test',
+                'last_name_kana' => 'test',
+                'first_name_kana' => 'test',
+                'tel' => '01201230123',
+                'birthday' => '1990-12-30',
+                'other' => '',
+                'is_admin' => 0,
+                'email' => 'test@test.com',
+                'password' => static::$password ??= Hash::make('password'),
+                'created_at' => new Carbon(),
+                'updated_at' => new Carbon()
+            ],
         ]);
     }
 }

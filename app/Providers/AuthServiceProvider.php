@@ -24,13 +24,13 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         // 管理者
-        Gate::define('isAdmin', function ($user) {
-            return ($user->is_admin === 1);
+        Gate::define('isAdmin', function ($member) {
+            return ($member->is_admin === 1);
         });
 
         // メンバー
-        Gate::define('isMember', function ($user) {
-            return ($user->is_admin === 0);
+        Gate::define('isMember', function ($member) {
+            return ($member->is_admin === 0);
         });
     }
 }

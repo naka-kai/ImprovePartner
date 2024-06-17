@@ -47,6 +47,10 @@ return [
             // 'provider' => 'users',
             'provider' => 'members',
         ],
+        'member' => [
+            'driver' => 'sanctum',
+            'provider' => 'members',
+        ],
     ],
 
     /*

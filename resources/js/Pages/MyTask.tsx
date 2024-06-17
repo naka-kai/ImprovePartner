@@ -15,7 +15,7 @@ import AddButton from '@/Components/Molecules/AddButton'
 
 const MyTask: React.FC<PageProps> = ({ auth }) => {
     return (
-        <Layout user={auth.user}>
+        <Layout member={auth.member}>
             <Head title="マイタスク" />
 
             <div>

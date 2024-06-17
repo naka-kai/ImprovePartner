@@ -55,7 +55,7 @@ const Project: React.FC<PageProps> = ({ auth }) => {
     }
 
     return (
-        <Layout user={auth.user}>
+        <Layout member={auth.member}>
             <Head title="プロジェクト" />
 
             <div className="h-14 overflow-hidden pb-[10px] w-full">

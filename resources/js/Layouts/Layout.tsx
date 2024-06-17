@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-import { User } from '@/types'
+import { Member } from '@/types'
 import { MainSidebarInfo } from '@/consts/MainSidebarConst'
 import Dropdown from '@/Components/Defaults/Dropdown'
 import Link from '@mui/material/Link'
@@ -7,9 +7,9 @@ import Typography from '@mui/material/Typography'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 
 export default function Layout({
-    user,
+    member,
     children,
-}: PropsWithChildren<{ user: User }>) {
+}: PropsWithChildren<{ member: Member }>) {
     return (
         <>
             <div className="min-h-screen flex">
@@ -26,7 +26,7 @@ export default function Layout({
                         ImprovePartner
                     </Link>
                     {MainSidebarInfo.map((item) => {
-                        if (user.is_admin === false) {
+                        if (member.is_admin === 0) {
                             if (item.isAdmin) {
                                 return null
                             }

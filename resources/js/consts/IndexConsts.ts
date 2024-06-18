@@ -18,7 +18,13 @@ export type DataType = MyTaskType
 export interface TableRowType {
     width: MenuType['width']
     alignment: 'left' | 'center' | 'right'
-    data: string | PriorityOptionsType | Date | number | StatusOptionsType
+    data:
+        | string
+        | PriorityOptionsType
+        | Date
+        | number
+        | StatusOptionsType
+        | boolean
     type: MenuType['name']
 }
 

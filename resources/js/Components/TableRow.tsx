@@ -12,12 +12,24 @@ type Props = {
 }
 
 const TableRow: React.FC<Props> = ({ extensionMenu, customMenu, info }) => {
-    const [isStop, setIsStop] = useState<boolean>(true) // タスクが停止中かどうか
+    // 各infoDataのアイコンの状態を管理するステートを作成
+    const [iconStates, setIconStates] = useState<{ [key: number]: boolean }>(
+        () => {
+            const initialState: { [key: number]: boolean } = {}
+            info.forEach((infoData) => {
+                initialState[infoData.id] = true // 初期状態は停止
+            })
+            return initialState
+        }
+    )
 
-    // 再生中か停止中かでアイコンを切り替える
-    const IconComponent = isStop
-        ? PlayCircleOutlinedIcon
-        : StopCircleOutlinedIcon
+    // アイコンの状態をトグルする
+    const toggleIconState = (id: number) => {
+        setIconStates((prevStates) => ({
+            ...prevStates,
+            [id]: !prevStates[id],
+        }))
+    }
 
     // dataの型の絞り込みを行う
     const isMyDataKey = (key: string): key is keyof DataType => {
@@ -36,41 +48,52 @@ const TableRow: React.FC<Props> = ({ extensionMenu, customMenu, info }) => {
 
     return (
         <div>
-            {info.map((infoData) => (
-                <div
-                    key={infoData.id}
-                    className="flex items-center justify-between border border-gray-300 p-1 my-1"
-                >
-                    <div className="flex items-center justify-start w-1/3">
-                        <Button>
-                            <IconComponent
-                                sx={{
-                                    fontSize: 35,
-                                    textAlign: 'center',
-                                    color: '#38bdf8',
-                                }}
-                                onClick={() => setIsStop(!isStop)}
-                            />
-                        </Button>
-                        <p className="w-5/6 text-left">{infoData.title}</p>
+            {info.map((infoData) => {
+                const isStop = iconStates[infoData.id]
+                const IconComponent = isStop
+                    ? PlayCircleOutlinedIcon
+                    : StopCircleOutlinedIcon
+                return (
+                    <div
+                        key={infoData.id}
+                        className="flex items-center justify-between border border-gray-300 p-1 my-1"
+                    >
+                        <div className="flex items-center justify-start w-1/3">
+                            <div id={'isPlayIcon_' + infoData.id}>
+                                <Button>
+                                    <IconComponent
+                                        sx={{
+                                            fontSize: 35,
+                                            textAlign: 'center',
+                                            color: '#38bdf8',
+                                        }}
+                                        onClick={() =>
+                                            toggleIconState(infoData.id)
+                                        }
+                                    />
+                                </Button>
+                            </div>
+                            <p className="w-5/6 text-left">{infoData.title}</p>
+                        </div>
+                        <div className="flex items-center justify-end w-2/3">
+                            {Object.values(customMenu).map((menu, key) => {
+                                const data = isMyDataKey(menu.name)
+                                    ? infoData[menu.name]
+                                    : undefined
+                                return (
+                                    <TableData
+                                        key={key}
+                                        width={menu.width}
+                                        alignment="center"
+                                        data={data !== undefined ? data : ''}
+                                        type={menu.name}
+                                    />
+                                )
+                            })}
+                        </div>
                     </div>
-                    <div className="flex items-center justify-end w-2/3">
-                        {Object.values(customMenu).map((menu, key) => (
-                            <TableData
-                                key={key}
-                                width={menu.width}
-                                alignment="center"
-                                data={
-                                    isMyDataKey(menu.name)
-                                        ? infoData[menu.name]
-                                        : ''
-                                }
-                                type={menu.name}
-                            />
-                        ))}
-                    </div>
-                </div>
-            ))}
+                )
+            })}
         </div>
     )
 }

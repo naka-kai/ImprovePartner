@@ -59,21 +59,36 @@ const TableRow: React.FC<Props> = ({ extensionMenu, customMenu, info }) => {
                         className="flex items-center justify-between border border-gray-300 p-1 my-1"
                     >
                         <div className="flex items-center justify-start w-1/3">
-                            <div id={'isPlayIcon_' + infoData.id}>
-                                <Button>
-                                    <IconComponent
-                                        sx={{
-                                            fontSize: 35,
-                                            textAlign: 'center',
-                                            color: '#38bdf8',
-                                        }}
-                                        onClick={() =>
-                                            toggleIconState(infoData.id)
-                                        }
+                            {'isStop' in infoData && (
+                                <div id={'isPlayIcon_' + infoData.id}>
+                                    <Button>
+                                        <IconComponent
+                                            sx={{
+                                                fontSize: 35,
+                                                textAlign: 'center',
+                                                color: '#38bdf8',
+                                            }}
+                                            onClick={() =>
+                                                toggleIconState(infoData.id)
+                                            }
+                                        />
+                                    </Button>
+                                </div>
+                            )}
+                            {Object.values(extensionMenu).map((menu, key) => {
+                                const data = isMyDataKey(menu.name)
+                                    ? infoData[menu.name]
+                                    : undefined
+                                return (
+                                    <TableData
+                                        key={key}
+                                        width={menu.width}
+                                        alignment="left"
+                                        data={data !== undefined ? data : ''}
+                                        type={menu.name}
                                     />
-                                </Button>
-                            </div>
-                            <p className="w-5/6 text-left">{infoData.title}</p>
+                                )
+                            })}
                         </div>
                         <div className="flex items-center justify-end w-2/3">
                             {Object.values(customMenu).map((menu, key) => {

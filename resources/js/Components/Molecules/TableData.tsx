@@ -28,6 +28,7 @@ const TableData: React.FC<TableRowType> = ({
     return (
         <>
             <p className={width + ' text-' + alignment}>
+                {type === 'title' && data}
                 {type === 'priority' && data.label}
                 {(type === 'scheduled_start_day' ||
                     type === 'scheduled_end_day') &&

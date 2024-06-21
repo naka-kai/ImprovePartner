@@ -71,7 +71,7 @@ const Project: React.FC<PageProps> = ({ auth }) => {
                 </div>
             </div>
             <div className="flex w-full mt-[-10px]">
-                <div className="bg-sky-200 w-52">
+                <div className="bg-sky-200 w-52 min-h-screen">
                     <div className="bg-[#1876D1] py-2">
                         <p className="text-white text-center text-lg">
                             プロジェクト一覧

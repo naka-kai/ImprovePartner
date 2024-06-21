@@ -12,8 +12,8 @@ export default function Layout({
 }: PropsWithChildren<{ member: Member }>) {
     return (
         <>
-            <div className="min-h-screen flex">
-                <nav className="bg-sky-300 w-64 h-screen border-r border-gray-400">
+            <div className="h-screen flex">
+                <nav className="bg-sky-300 w-64 min-h-screen border-r border-gray-400">
                     <Link
                         href="/"
                         className="hover:opacity-70 block p-2 text-center"

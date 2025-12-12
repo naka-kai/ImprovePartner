@@ -12,11 +12,11 @@
 
 ## 環境
 
-- Laravel ver 10.10
-- Sail ver 1.29
-- tailwindcss ver 3.2.1
-- react ver 18.2.0
-- typescript ver 5.0.2
+- Laravel
+- Sail
+- Tailwindcss
+- React
+- TypeScript
 
 ## 情報
 

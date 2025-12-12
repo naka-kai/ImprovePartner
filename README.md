@@ -1,6 +1,7 @@
 # ImprovePartner
 
-## 時間 × タスク管理ができるアプリ
+**作業時間の分析ができるタスク管理ツール**
+
 ### マイタスク
 - フロントのみ
 <img width="1917" height="613" alt="mytask" src="https://github.com/user-attachments/assets/c8bb539e-2ab5-4342-86e6-6e8f864bb6fd" />
